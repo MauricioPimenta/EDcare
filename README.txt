@@ -10,8 +10,8 @@ Arquivos de Entrada:
 1ª e 2ª Etapas: Setup!
 -----------------------------------
   1ª Etapa: Ler arquivo "apoio.txt"
-    -> Ler a primeira linha que contém os idosos e armazenar cada um dos idosos na lista de idosos.
-    -> Ler as próximas linhas: Cada linha define as relações de amizades.
+    -> Ler a primeira linha que contém os idosos e armazenar cada um dos idosos na lista de idosos.  
+    -> Ler as próximas linhas: Cada linha define as relações de amizades.  
         - Acrescenta Amigos da lista de amigos do Idoso.
   
   2ª Etapa: Ler Arquivo "cuidadores.txt"
