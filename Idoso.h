@@ -5,22 +5,21 @@ typedef struct idoso Idoso;
 
 #include "ListaAmigos.h"
 #include "ListaCuidadores.h"
-#include "listaMusica.h"
 
 
 //  Cria estrutura idoso
 //  inputs: nome do idoso
 //  output: ponteiro para a estrutura Idoso
-//  pre-condicao: não existe
+//  pre-condicao: nï¿½o existe
 //  pos-condicao: ponteiro da estrutura alocado pronto para uso
 
 Idoso *criaIdoso(char *nome);
 
-//  Libera memória alocada para o idoso
+//  Libera memï¿½ria alocada para o idoso
 //  inputs: ponteiro para a estrutura Idoso
 //  output: nenhum
 //  pre-condicao: idoso existe
-//  pos-condicao: a memória alocada para a estrutura Idoso foi liberada
+//  pos-condicao: a memï¿½ria alocada para a estrutura Idoso foi liberada
 //
 void destroiIdoso(Idoso *idoso);
 
@@ -29,7 +28,7 @@ void destroiIdoso(Idoso *idoso);
 //  inputs: ponteiro para a estrutura Idoso
 //  output: nome do idoso
 //  pre-condicao: idoso existe
-//  pos-condicao: idoso nao é modificado e nome do idoso disponível
+//  pos-condicao: idoso nao ï¿½ modificado e nome do idoso disponï¿½vel
 
 char *retornaNomeIdoso(Idoso *idoso);
 
@@ -37,7 +36,7 @@ char *retornaNomeIdoso(Idoso *idoso);
 //  inputs: ponteiro para a estrutura Idoso
 //  output: ponteiro para a estrutura ListCuidadores
 //  pre-condicao: idoso precisa existir
-//  pos-condicao: idoso nao é modificado e estrutura dos cuidadores disponível
+//  pos-condicao: idoso nao ï¿½ modificado e estrutura dos cuidadores disponï¿½vel
 
 ListCuidadores *retornaListCuidadores(Idoso *idoso);
 
@@ -45,7 +44,7 @@ ListCuidadores *retornaListCuidadores(Idoso *idoso);
 //  inputs: ponteiro para estrutura Idoso
 //  output: ponteiro para estrutura ListAmigos
 //  pre-condicao: idoso precisa existir
-//  pos-condicao: idoso nao é alterado e lista de amigos disponível
+//  pos-condicao: idoso nao ï¿½ alterado e lista de amigos disponï¿½vel
 
 ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
 

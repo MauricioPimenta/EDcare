@@ -4,8 +4,6 @@
 
 #include "ListaAmigos.h"
 
-
-
 struct celAmigos{
   Idoso *idoso;
   CelAmigos *prox;

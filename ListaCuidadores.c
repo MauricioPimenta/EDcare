@@ -5,6 +5,7 @@
 #include <sys/stat.h> //Diretorio
 
 #include "ListaCuidadores.h"
+#include "Cuidador.h"
 
 struct CelCuidador{
     Cuidador* cuidador;
@@ -16,7 +17,11 @@ struct listCuidador{
     CelCuidador *ult;
 };
 
-
+//  Funcao que inicializa a lista de cuidadores
+//  inputs: nenhum
+//  output: ponteiro para a estrutura ListCuidador
+//  pre-condicao: nenhuma
+//  pos-condicao: ponteiro de retorno existe e esta alocado
 ListCuidador* inicializaListaCuidador(){
   ListCuidador* lista = (ListCuidador*)malloc(sizeof(ListCuidador));
 
@@ -26,12 +31,13 @@ ListCuidador* inicializaListaCuidador(){
   return lista;
 }
 
+//  Funcao que preenche a lista de cuidadores
+//  inputs: string com o nome do arquivo com os nomes dos cuidadores
+//  output: nenhum
+//  pre-condicao: lista de cuidadores cujos nomes sao separados com ";", todos dispostos na primeira linha do arquivo de texto
+//  pos-condicao: lista de cuidadores criada
 
-
-
-
-
-// só coloquei os cuidadores em si, sem relações com nada
+// so coloquei os cuidadores em si, sem relacoes com nada
 ListCuidador *preencheListCuidador(char* arquivo){
   ListCuidador *lista = inicializaListaCuidador();
 
@@ -46,7 +52,7 @@ ListCuidador *preencheListCuidador(char* arquivo){
     printf("Nao foi possivel abrir o arquivo. %s\n", arquivo);
   }
 
-  // Pega informações somente da primeira linha
+  // Pega informaï¿½ï¿½es somente da primeira linha
 
   fscanf(fp, "%[^\n]\n", conteudo);
 
@@ -96,7 +102,7 @@ void preencheListCuidador(ListIdoso* listaIdoso, char* arquivo){
     printf("Erro.\n");
   }
 
-  // Pega informações somente da primeira linha
+  // Pega informaï¿½ï¿½es somente da primeira linha
 
   fscanf(fp, "%[^\n]\n", conteudo);
   char* nome = strtok(conteudo, ";");
@@ -208,7 +214,7 @@ void retiraCuidadorDaLista(ListCuidador* lista, CelCuidador* cuidador){
     }
 
     if(p == NULL){
-      printf("Item não encontrado.\n");
+      printf("Item nï¿½o encontrado.\n");
       exit(1);
     }
 

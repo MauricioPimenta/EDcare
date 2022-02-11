@@ -6,13 +6,20 @@
 
 struct cuidador{
   char *nome;
-  ListMedidasCuidador *medidas;
+  int Latitude;
+  int Longitude;
 };
 
 Cuidador* criaCuidador(char* nome){
-  Cuidador* cuidador = (Cuidador*)malloc(sizeof(Cuidador));
-  cuidador->nome = strdup(nome);
-  cuidador->medidas = inicializaListMedidas();
+
+	// Alloca espaço para o cuidador
+	Cuidador* cuidador = (Cuidador*)malloc(sizeof(Cuidador));
+	
+	// Alloca espaço para o nome do cuidador
+  	cuidador->nome = strdup(nome);
+	
+  	cuidador->Latitude = 0;
+  	cuidador->Longitude = 0;
 
   return cuidador;
 }
@@ -21,19 +28,23 @@ char* retornaNomeCuidador(Cuidador* cuidador){
   return cuidador->nome;
 }
 
-ListMedidas* retornaListMedidas(Cuidador* cuidador){
-  return cuidador->medidas;
+int retornaLatitude(Cuidador* cuidador){
+  return cuidador->Latitude;
+}
+
+int retornaLongitude(Cuidador* cuidador){
+  return cuidador->Longitude;
 }
 
 void destroiCuidador(Cuidador* cuidador){
-  destroiListMedidas(cuidador->medidas);
   free(cuidador->nome);
   free(cuidador);
 }
 
 void imprimeCuidador(Cuidador* cuidador){
-  printf("Nome: %s\n", cuidador->nome);
-  imprimeListMedidas(cuidador->medidas);
+  printf("\nNome: %s\n", cuidador->nome);
+  printf("Posição: %d,%d\n\n", cuidador->Latitude, cuidador->Longitude);
+  
 }
 
 

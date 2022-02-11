@@ -5,92 +5,90 @@ typedef struct celCuidador CelCuidador;
 typedef struct listCuidador ListCuidador;
 
 #include "ListaIdoso.h"
-#include "listaMusica.h"
-#include "playlist.h"
 
 
-//  Função que inicializa a lista de cuidadores
+//  Funcao que inicializa a lista de cuidadores
 //  inputs: nenhum
 //  output: ponteiro para a estrutura ListCuidador
 //  pre-condicao: nenhuma
 //  pos-condicao: ponteiro de retorno existe e esta alocado
 ListCuidador* inicializaListaCuidador(void);
 
-//  Libera memória alocada para a lista de cuidadores
+//  Libera memï¿½ria alocada para a lista de cuidadores
 //  inputs: ponteiro para a estrutura ListCuidador
 //  output: nenhum
 //  pre-condicao: ListCuidador precisa existir
-//  pos-condicao: toda a memória alocada para ListCuidador foi liberada
+//  pos-condicao: toda a memï¿½ria alocada para ListCuidador foi liberada
 void destroiListCuidador(ListCuidador *lista);
 
-//  Função que preenche a lista de cuidadores
+//  Funï¿½ï¿½o que preenche a lista de cuidadores
 //  inputs: string com o nome do arquivo com os nomes dos cuidadores
 //  output: nenhum
-//  pre-condicao: lista de cuidadores cujos nomes são separados com ";", todos dispostos na primeira linha do arquivo de texto
+//  pre-condicao: lista de cuidadores cujos nomes sï¿½o separados com ";", todos dispostos na primeira linha do arquivo de texto
 //  pos-condicao: lista de cuidadores criada
 ListCuidador *preencheListCuidador(char* arquivo);
 
-//  Função que cria e insere o cuidador no final da lista
+//  Funï¿½ï¿½o que cria e insere o cuidador no final da lista
 //  inputs: ponteiro para a estrutura ListCuidador e ponteiro para char
 //  output: ponteiro para o cuidador criada
 //  pre-condicao: lista de cuidador existe
 //  pos-condicao: lista de cuidador continua existindo, agora com um novo cuidador
 CelCuidador* insereCuidador (ListCuidador* lista, char* nome);
 
-//  Função que insere um cuidador que ja existe no inicio da lista
+//  Funï¿½ï¿½o que insere um cuidador que ja existe no inicio da lista
 //  inputs: ponteiro para a estrutura ListCuidador e o ponteiro para Cuidador
 //  output: nenhum
 //  pre-condicao: lista de cuidadores e cuidador existem
 //  pos-condicao: lista de cuidadores continua existindo, agora com um novo cuidador
 void insereNovoCuidador(ListCuidador* lista, Cuidador *cuidador);
 
-//  Função que retira cuidador da lista de cuidadores
+//  Funï¿½ï¿½o que retira cuidador da lista de cuidadores
 //  inputs: ponteiro para a estrutura ListCuidador e o ponteiro para CelCuidador
 //  output: nenhum
 //  pre-condicao: lista de cuidadores existe
 //  pos-condicao: lista de cuidadores continua existindo, agora com cuidador desejado retirado
 void retiraCuidadorDaLista(ListCuidador* lista, CelCuidador* cuidador);
 
-//  Função que retorna o cuidador da celula
+//  Funï¿½ï¿½o que retorna o cuidador da celula
 //  inputs: ponteiro para celula de cuidador
 //  output: ponteiro para cuidador
 //  pre-condicao: celula existe
-//  pos-condicao: celula nao é modificada
+//  pos-condicao: celula nao ï¿½ modificada
 Cuidador* retornaCuidadorDaCelula(CelCuidador* p);
 
-//  Função que retorna a proxima célula
+//  Funï¿½ï¿½o que retorna a proxima cï¿½lula
 //  inputs: ponteiro para CelCuidador
 //  output: ponteiro para CelCuidador
 //  pre-condicao: lista de cuidador existe
-//  pos-condicao: lista de cuidador nao é modificada
+//  pos-condicao: lista de cuidador nao ï¿½ modificada
 CelCuidador *retornaProximoCuidador(CelCuidador *p);
 
-//  Função que retorna primeira celula
+//  Funï¿½ï¿½o que retorna primeira celula
 //  inputs: ponteiro para ListCuidador
 //  output: ponteiro para CelCuidador
 //  pre-condicao: lista de cuidadores precisa existir
-//  pos-condicao: lista de cuidadores nao é modificada
+//  pos-condicao: lista de cuidadores nao ï¿½ modificada
 CelCuidador *retornaPrimeiroCuidador(ListCuidador *lista);
 
-//  Função que retorna cuidador com o nome especificado
+//  Funï¿½ï¿½o que retorna cuidador com o nome especificado
 //  inputs: ponteiro para ListCuidador e ponteiro para char
 //  output: ponteiro para cuidador
 //  pre-condicao: lista de cuidador precisa existir
-//  pos-condicao: lista de cuidador nao é modificada
+//  pos-condicao: lista de cuidador nao ï¿½ modificada
 Cuidador* buscaCuidador(ListCuidador* lista, char* nome);
 
-//  Função que retorna a celula que contem o cuidador com o nome especificado
+//  Funï¿½ï¿½o que retorna a celula que contem o cuidador com o nome especificado
 //  inputs: ponteiro para ListCuidador e ponteiro para char
 //  output: ponteiro para CelCuidador
 //  pre-condicao: lista de cuidadores existe
-//  pos-condicao: lista de cuidadores nao é modificada
+//  pos-condicao: lista de cuidadores nao ï¿½ modificada
 CelCuidador* buscaCuidadorERetornaCelula(ListCuidador* lista, char* nome);
 
-/* Função que imprime lista de cuidadores
+/* Funï¿½ï¿½o que imprime lista de cuidadores
  * inputs: ponteiro para ListCuidador
  * output: nenhum
  * pre-condicao: lista de cuidadores existe
- * pos-condicao: lista de cuidadores nao é alterada
+ * pos-condicao: lista de cuidadores nao ï¿½ alterada
  */
 void imprimeListCuidador(ListCuidador* lista);
 
