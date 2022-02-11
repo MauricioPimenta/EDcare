@@ -7,12 +7,14 @@
 #include "ListaCuidadores.h"
 #include "Cuidador.h"
 
-struct CelCuidador{
+struct celCuidador
+{
     Cuidador* cuidador;
     CelCuidador *prox;
 };
 
-struct listCuidador{
+struct listCuidador
+{
     CelCuidador *prim;
     CelCuidador *ult;
 };
@@ -38,7 +40,8 @@ ListCuidador* inicializaListaCuidador(){
 //  pos-condicao: lista de cuidadores criada
 
 // so coloquei os cuidadores em si, sem relacoes com nada
-ListCuidador *preencheListCuidador(char* arquivo){
+ListCuidador *preencheListCuidador(char* arquivo)
+{
   ListCuidador *lista = inicializaListaCuidador();
 
   CelCuidador* p = lista->prim;
@@ -48,11 +51,10 @@ ListCuidador *preencheListCuidador(char* arquivo){
   FILE *fp = fopen(arquivo, "r");
   char conteudo[70];
 
-   if (fp == NULL){
+   if (fp == NULL)
     printf("Nao foi possivel abrir o arquivo. %s\n", arquivo);
-  }
 
-  // Pega informa��es somente da primeira linha
+  // Pega informacoes somente da primeira linha
 
   fscanf(fp, "%[^\n]\n", conteudo);
 
@@ -71,93 +73,6 @@ ListCuidador *preencheListCuidador(char* arquivo){
 
   return lista;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-void preencheListCuidador(ListIdoso* listaIdoso, char* arquivo){
-  listCuidador* lista = (ListCuidador*)malloc(sizeof(ListCuidador));
-  lista->prim = NULL;
-  lista->ult = NULL;
-
-  CelCuidador* p;
-
-  // ------ Leitura do arquivo ------
-
-  char *diretorio = '\0';
-
-  FILE *fp = fopen(arquivo, "r");
-  char conteudo[10000] = "\0";
-
-   if (fp == NULL){
-    printf("Erro.\n");
-  }
-
-  // Pega informa��es somente da primeira linha
-
-  fscanf(fp, "%[^\n]\n", conteudo);
-  char* nome = strtok(conteudo, ";");
-
-  //colocando os cuidadores na lista
-  while( nome != NULL ) {
-        insereNovoCuidador(lista, criaCuidador(nome));
-
-        nome = strtok(NULL, ";");
-  }
-
-
-  // lendo as linhas seguintes
-  fscanf(fp, "%[^EOF]", conteudo);
-
-  char* test = NULL;
-  char* linha;
-  int i = 0, j = 0, k = 0;
-  char nome[20];
-  char num[10];
-  char musica[50];
-  int qtd = 0;
-
- // ------ Coleta de informacao de cada linha ------
-
-  for (linha = strtok_r(conteudo, "\n", &test); linha != NULL; linha = strtok_r(NULL, "\n", &test)){ //for de linha em linha
-
-        for(i = 0; linha[i] != ';'; i++){
-          nome[i] = linha[i];
-        }
-        nome[i] = '\0';
-
-        for(i += 1, j = 0; linha[i] != ';'; i++, j++){
-          num[j] = linha[i];
-        }
-        num[j] = '\0';
-
-        qtd = atof(num);
-
-        for (j = 0; j < atof(num); j++){
-          for(i += 1, k = 0; linha[i] != ';' && linha[i] != '\0'; i++, k++){
-            musica[k] = linha[i];
-          }
-          musica[k] = '\0';
-
-          // ------ Insercao nas listas ------
-
-          p = inserePlaylist(retornaListPlaylist(buscaUsuario(listaUsuarios,nome)), musica);
-
-          criaListaMusica(retornaListMusica(retornaPlaylistaDaCelula(p)), musica);
-        }
-  }
-  fclose(fp);
-}
-*/
 
 Cuidador* retornaCuidadorDaCelula(CelCuidador* p){
   return p->cuidador;

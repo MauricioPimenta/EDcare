@@ -38,7 +38,7 @@ char *retornaNomeIdoso(Idoso *idoso);
 //  pre-condicao: idoso precisa existir
 //  pos-condicao: idoso nao � modificado e estrutura dos cuidadores dispon�vel
 
-ListCuidadores *retornaListCuidadores(Idoso *idoso);
+ListCuidador *retornaListCuidadores(Idoso *idoso);
 
 //  Retorna Lista de amigos do idoso
 //  inputs: ponteiro para estrutura Idoso
@@ -54,22 +54,7 @@ ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
 //  pre-condicao: Usuario precisa existir
 //  pos-condicao: Usuario nao eh alterado
 
-void imprimeUsuario(Usuario* usuario);
-
-
-
-
-
-
-
-/*Retorna Lista de musicas do Usuario
- * inputs: ponteiro para struct Usuario
- * output: ponteiro para struct ListMusic
- * pre-condicao: Usuario precisa existir
- * pos-condicao: Usuario nao eh alterado
- */
-//ListMusica *retornaPlaylistUsuario(Usuario *usuario);
-
+void imprimeIdoso(Idoso* idoso);
 
 
 #endif
