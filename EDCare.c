@@ -24,7 +24,8 @@ int main()
 {
 
     printf("Criando lista de idosos...\n");
-    ListIdoso *listaIdosos = inicializaListIdoso ( " ../Entrada/apoio.txt " );
+    ListIdoso *listaIdosos = inicializaListIdoso ( " ./Entrada/apoio.txt " );
+	imprimeListIdoso(listaIdosos);
 
     printf("Preenchendo listas de cuidadores...\n");
     ListCuidador *listaCuidadores = preencheListCuidador("./Entrada/cuidadores.txt");
@@ -43,6 +44,6 @@ int main()
 
 
 
-
+	return 0;
 
 }

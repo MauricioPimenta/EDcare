@@ -4,22 +4,22 @@
 typedef struct idoso Idoso;
 
 #include "ListaAmigos.h"
-#include "ListaCuidadores.h"
+//#include "ListaCuidadores.h"
 
 
 //  Cria estrutura idoso
 //  inputs: nome do idoso
 //  output: ponteiro para a estrutura Idoso
-//  pre-condicao: n�o existe
+//  pre-condicao: não existe
 //  pos-condicao: ponteiro da estrutura alocado pronto para uso
 
 Idoso *criaIdoso(char *nome);
 
-//  Libera mem�ria alocada para o idoso
+//  Libera memória alocada para o idoso
 //  inputs: ponteiro para a estrutura Idoso
 //  output: nenhum
 //  pre-condicao: idoso existe
-//  pos-condicao: a mem�ria alocada para a estrutura Idoso foi liberada
+//  pos-condicao: a memória alocada para a estrutura Idoso foi liberada
 //
 void destroiIdoso(Idoso *idoso);
 
@@ -28,7 +28,7 @@ void destroiIdoso(Idoso *idoso);
 //  inputs: ponteiro para a estrutura Idoso
 //  output: nome do idoso
 //  pre-condicao: idoso existe
-//  pos-condicao: idoso nao � modificado e nome do idoso dispon�vel
+//  pos-condicao: idoso nao é modificado e nome do idoso disponível
 
 char *retornaNomeIdoso(Idoso *idoso);
 
@@ -36,25 +36,27 @@ char *retornaNomeIdoso(Idoso *idoso);
 //  inputs: ponteiro para a estrutura Idoso
 //  output: ponteiro para a estrutura ListCuidadores
 //  pre-condicao: idoso precisa existir
-//  pos-condicao: idoso nao � modificado e estrutura dos cuidadores dispon�vel
+//  pos-condicao: idoso nao é modificado e estrutura dos cuidadores disponível
 
-ListCuidador *retornaListCuidadores(Idoso *idoso);
+//ListCuidadores *retornaListCuidadores(Idoso *idoso);
 
 //  Retorna Lista de amigos do idoso
 //  inputs: ponteiro para estrutura Idoso
 //  output: ponteiro para estrutura ListAmigos
 //  pre-condicao: idoso precisa existir
-//  pos-condicao: idoso nao � alterado e lista de amigos dispon�vel
+//  pos-condicao: idoso nao é alterado e lista de amigos disponível
 
-ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
+//ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
 
 //  Imprime Usuario
 //  inputs: ponteiro para Usuario
 //  output: nenhum
 //  pre-condicao: Usuario precisa existir
 //  pos-condicao: Usuario nao eh alterado
+void imprimeIdoso(Idoso* usuario);
 
-void imprimeIdoso(Idoso* idoso);
+
+
 
 
 #endif
