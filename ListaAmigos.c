@@ -1,8 +1,9 @@
-#include <stdio.h>
+/* #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "ListaAmigos.h"
+#include "Idoso.h"
 
 struct celAmigos{
   Idoso *idoso;
@@ -90,3 +91,4 @@ void destroiListaAmigos(ListAmigos *listAmigos){
 
   free(listAmigos);
 }
+ */

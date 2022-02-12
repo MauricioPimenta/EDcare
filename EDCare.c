@@ -16,7 +16,7 @@
 
 #include "Idoso.h"
 #include "Cuidador.h"
-#include "ListaAmigos.h"
+
 #include "ListaCuidadores.h"
 #include "ListaIdoso.h"
 
@@ -24,11 +24,11 @@ int main()
 {
 
     printf("Criando lista de idosos...\n");
-    ListIdoso *listaIdosos = inicializaListIdoso ( " ./Entrada/apoio.txt " );
+    ListIdoso *listaIdosos = inicializaListIdoso ( "./Entradas/apoio.txt" );
 	imprimeListIdoso(listaIdosos);
 
     printf("Preenchendo listas de cuidadores...\n");
-    ListCuidador *listaCuidadores = preencheListCuidador("./Entrada/cuidadores.txt");
+   // ListCuidador *listaCuidadores = preencheListCuidador("./Entrada/cuidadores.txt");
 
 
 

@@ -1,3 +1,5 @@
+/* 
+
 #ifndef LISTA_AMIGOS_H_
 #define LISTA_AMIGOS_H_
 
@@ -63,4 +65,4 @@ void imprimeListAmigos(ListAmigos *listAmigos);
  */
 //void retiraAmigo(ListAmigos* lista, char *nome);
 
-#endif
+//#ENDIF

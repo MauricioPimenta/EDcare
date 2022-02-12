@@ -4,8 +4,9 @@
 #include <sys/types.h> //Diretorio
 #include <sys/stat.h> //Diretorio
 
+
 #include "ListaCuidadores.h"
-#include "Cuidador.h"
+
 
 struct celCuidador
 {
@@ -44,7 +45,7 @@ ListCuidador *preencheListCuidador(char* arquivo)
 {
   ListCuidador *lista = inicializaListaCuidador();
 
-  CelCuidador* p = lista->prim;
+  //CelCuidador* p = lista->prim;
 
   // Abre o arquivo para leitura
 

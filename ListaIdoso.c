@@ -20,6 +20,12 @@ struct listAmigos{
   CelIdoso *ult;
 };
 
+ListIdoso* CriaListaIdoso()
+{
+	ListIdoso* lista = (ListIdoso*)malloc(sizeof(ListIdoso));
+	lista->prim = NULL;
+	lista->ult = NULL;
+}
 
 
 ListIdoso* inicializaListIdoso(char* arquivo){
@@ -101,6 +107,14 @@ void insereAmigoNaLista(ListAmigos *lista, Idoso *amigo){
     nova->idoso = amigo;
     nova->prox = NULL;
 
+	if (lista == NULL)
+	{
+		ListIdoso* lista = (ListIdoso*)malloc(sizeof(ListIdoso));
+		lista->prim = NULL;
+		lista->ult = NULL;
+	}
+		
+	
     if(lista->prim == NULL){
       lista->prim = nova;
       lista->ult = nova;

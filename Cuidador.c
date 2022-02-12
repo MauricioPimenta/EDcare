@@ -46,5 +46,3 @@ void imprimeCuidador(Cuidador* cuidador){
   printf("Posição: %d,%d\n\n", cuidador->Latitude, cuidador->Longitude);
   
 }
-
-

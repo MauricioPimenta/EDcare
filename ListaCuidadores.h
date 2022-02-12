@@ -1,11 +1,11 @@
 #ifndef LISTACUIDADORES_H_
 #define LISTACUIDADORES_H_
 
-typedef struct celCuidador CelCuidador;
-typedef struct listCuidador ListCuidador;
-
+#include "Cuidador.h"
 #include "ListaIdoso.h"
 
+typedef struct celCuidador CelCuidador;
+typedef struct listCuidador ListCuidador;
 
 //  Funcao que inicializa a lista de cuidadores
 //  inputs: nenhum
