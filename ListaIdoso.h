@@ -3,6 +3,8 @@
 
 typedef struct celIdoso CelIdoso;
 typedef struct listIdoso ListIdoso;
+typedef struct listAmigos ListAmigos;
+
 
 #include "Idoso.h"
 
@@ -13,6 +15,21 @@ typedef struct listIdoso ListIdoso;
 //  pre-condicao: nenhuma
 //  pos-condicao: ponteiro de retorno existe e está alocado
 ListIdoso* inicializaListIdoso(char* arquivo);
+
+//  Insere dois idosos como amigo um do outro(amizade reciproca) em suas próprias listas de amigos
+//  inputs: ponteiro para ListIdoso e dois ponteiros para char
+//  output: nenhum
+//  pre-condicao: lista de idosos existe e idosos existem
+//  pos-condicao: lista de idosos não é modificada e as listas de amigos de cada idoso sao modificadas
+void insereAmizade(ListIdoso *listIdoso, char* amigo1, char* amigo2);
+
+//  Insere o idoso no final da lista de amigos
+//  inputs: ponteiro para ListAmigos e para idoso
+//  output: nenhum
+//  pre-condicao: lista de amigos existe e usuario existe
+//  pos-condicao: lista de amigos continua existindo, agora com um novo idoso
+void insereAmigoNaLista(ListAmigos *lista, Idoso *amigo);
+
 
 //  Função que libera a memória alocada da lista
 //  inputs: ponteiro para a estrutura ListIdoso
@@ -77,4 +94,12 @@ Idoso *retornaIdosoCelula(CelIdoso* p);
 //  pos-condicao: lista de idosos nao é alterada
 void imprimeListIdoso(ListIdoso* lista);
 
+//  Imprime lista de amigos
+//  inputs: ponteiro para ListAmigos
+//  output: nenhum
+//  pre-condicao: lista de amigos existe
+//  pos-condicao: lista de amigos nao é alterada
+void imprimeListAmigos(ListAmigos *listAmigos);
+
 #endif
+

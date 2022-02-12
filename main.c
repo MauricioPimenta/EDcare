@@ -1,13 +1,13 @@
 #include <stdio.h>
+#include "idoso.h"
+#include "ListaIdoso.h"
 
 int main(){
 
     printf("Criando lista de idosos...\n");
-    ListIdoso *listaIdosos = inicializaListIdoso ( " ../Entrada/amizade.txt " );
+    ListIdoso *listaIdosos = inicializaListIdoso ( "C:/Users/dstei/Downloads/entradas2/apoio.txt" );
 
-    printf("Preenchendo listas de cuidadores...\n");
-    ListCuidador *listaCuidadores = preencheListPlaylist("../Entrada/playlists.txt");
-
+    imprimeListIdoso(listaIdosos);
 
 
 
@@ -15,13 +15,6 @@ int main(){
 
 
 
-
-
-
-
-
-
-
-
-
+    return 0;
 }
+

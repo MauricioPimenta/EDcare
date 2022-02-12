@@ -3,9 +3,7 @@
 
 typedef struct idoso Idoso;
 
-#include "ListaAmigos.h"
-#include "ListaCuidadores.h"
-#include "listaMusica.h"
+//#include "ListaCuidadores.h"
 
 
 //  Cria estrutura idoso
@@ -39,7 +37,7 @@ char *retornaNomeIdoso(Idoso *idoso);
 //  pre-condicao: idoso precisa existir
 //  pos-condicao: idoso nao é modificado e estrutura dos cuidadores disponível
 
-ListCuidadores *retornaListCuidadores(Idoso *idoso);
+//ListCuidadores *retornaListCuidadores(Idoso *idoso);
 
 //  Retorna Lista de amigos do idoso
 //  inputs: ponteiro para estrutura Idoso
@@ -47,15 +45,14 @@ ListCuidadores *retornaListCuidadores(Idoso *idoso);
 //  pre-condicao: idoso precisa existir
 //  pos-condicao: idoso nao é alterado e lista de amigos disponível
 
-ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
+//ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
 
 //  Imprime Usuario
 //  inputs: ponteiro para Usuario
 //  output: nenhum
 //  pre-condicao: Usuario precisa existir
 //  pos-condicao: Usuario nao eh alterado
-
-void imprimeUsuario(Usuario* usuario);
+void imprimeIdoso(Idoso* usuario);
 
 
 
@@ -74,3 +71,4 @@ void imprimeUsuario(Usuario* usuario);
 
 
 #endif
+

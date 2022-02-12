@@ -3,18 +3,27 @@
 #include <string.h>
 
 #include "Idoso.h"
+#include "ListaIdoso.h"
 
 struct idoso{
   char *nome;
   ListAmigos *amigos;
-  ListCuidadores *cuidadores;
+  //ListCuidadores *cuidadores;
+  int latitude;
+  int longitude;
+  float temperatura;
+  int queda;
 };
 
 Idoso* criaIdoso(char *nome){
   Idoso* idoso = (Idoso*)malloc(sizeof(Idoso));
   idoso->nome = strdup(nome);
-  idoso->cuidadores = inicializaListCuidadores();
-  idoso->amigos = inicializaListaAmigo();
+  //idoso->cuidadores = NULL;
+  idoso->amigos = NULL;
+  idoso->latitude = 0;
+  idoso->longitude = 0;
+  idoso->temperatura = 0;
+  idoso->queda = 0;
 
   return idoso;
 }
@@ -27,22 +36,23 @@ ListAmigos *retornaListAmigosIdoso(Idoso *idoso){
   return idoso->amigos;
 }
 
-ListCuidadores *retornaListCuidadores(Idoso *idoso){
-  return idoso->cuidadores;
-}
+//ListCuidadores *retornaListCuidadores(Idoso *idoso){
+  //return idoso->cuidadores;
+//}
 
 void destroiIdoso(Idoso *idoso){
   free(idoso->nome);
-  destroiListCuidadores(idoso->cuidadores);
-  destroiListaAmigos(idoso->amigos);
+  //destroiListCuidadores(idoso->cuidadores);
+  //destroiListaAmigos(idoso->amigos);
 
   free(idoso);
 }
 
 void imprimeIdoso(Idoso* idoso){
   printf("Nome: %s\n", idoso->nome);
-  imprimeListCuidadores(idoso->cuidadores);
+  //imprimeListCuidadores(idoso->cuidadores);
   imprimeListAmigos(idoso->amigos);
 }
+
 
 
