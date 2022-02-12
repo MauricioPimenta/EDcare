@@ -7,7 +7,7 @@
 struct idoso{
   char *nome;
   ListAmigos *amigos;
-  ListCuidadores *cuidadores;
+  ListCuidador *cuidadores;
 };
 
 Idoso* criaIdoso(char *nome){
@@ -27,7 +27,7 @@ ListAmigos *retornaListAmigosIdoso(Idoso *idoso){
   return idoso->amigos;
 }
 
-ListCuidadores *retornaListCuidadores(Idoso *idoso){
+ListCuidador *retornaListCuidadores(Idoso *idoso){
   return idoso->cuidadores;
 }
 

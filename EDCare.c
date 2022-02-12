@@ -27,7 +27,7 @@ int main()
     ListIdoso *listaIdosos = inicializaListIdoso ( " ../Entrada/apoio.txt " );
 
     printf("Preenchendo listas de cuidadores...\n");
-    ListCuidador *listaCuidadores = preencheListPlaylist("./Entrada/cuidadores.txt");
+    ListCuidador *listaCuidadores = preencheListCuidador("./Entrada/cuidadores.txt");
 
 
 
