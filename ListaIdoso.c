@@ -44,7 +44,7 @@ ListIdoso* inicializaListIdoso(char* arquivo){
   // Abre o arquivo para leitura
 
   FILE *fp = fopen(arquivo, "r");
-  char conteudo[70];
+  char conteudo[10000];
 
    if (fp == NULL){
     printf("Nao foi possivel abrir o arquivo. %s.\n", arquivo);
@@ -65,7 +65,7 @@ ListIdoso* inicializaListIdoso(char* arquivo){
   // Agora trabalhando com as informações(linhas) restantes
 
   fscanf(fp, "%[^EOF]", conteudo);
-  char aux1[100], aux2[100];
+  char aux1[10000], aux2[10000];
   int i = 0;
   int j = 0;
   nome = strtok(conteudo, "\n");
