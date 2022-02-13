@@ -17,10 +17,10 @@ struct idoso{
 
 Idoso* criaIdoso(char *nome){
   Idoso* idoso = (Idoso*)malloc(sizeof(Idoso));
-  
+
   idoso->nome = strdup(nome);
-  
-  idoso->amigos = NULL;
+
+  idoso->amigos = CriaListAmigos();
   idoso->latitude = 0;
   idoso->longitude = 0;
   idoso->temperatura = 0;
@@ -54,5 +54,4 @@ void imprimeIdoso(Idoso* idoso){
   //imprimeListCuidadores(idoso->cuidadores);
   imprimeListAmigos(idoso->amigos);
 }
-
 
