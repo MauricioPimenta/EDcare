@@ -49,7 +49,10 @@ char *retornaNomeIdoso(Idoso *idoso);
 
 ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
 
-//  Imprime Usuario
+void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
+
+
+//  Imprime idoso
 //  inputs: ponteiro para Usuario
 //  output: nenhum
 //  pre-condicao: Usuario precisa existir
