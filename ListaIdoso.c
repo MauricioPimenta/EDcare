@@ -20,12 +20,13 @@ struct listAmigos{
   CelIdoso *ult;
 };
 
-ListIdoso* CriaListaIdoso()
+/* ListIdoso* CriaListaIdoso()
 {
 	ListIdoso* lista = (ListIdoso*)malloc(sizeof(ListIdoso));
 	lista->prim = NULL;
 	lista->ult = NULL;
-}
+	return lista;
+} */
 
 
 ListIdoso* inicializaListIdoso(char* arquivo){
@@ -55,8 +56,6 @@ ListIdoso* inicializaListIdoso(char* arquivo){
   }
 
   // Agora trabalhando com as informações(linhas) restantes
-
-
 
   fscanf(fp, "%[^EOF]", conteudo);
   char aux1[100], aux2[100];
@@ -109,7 +108,7 @@ void insereAmigoNaLista(ListAmigos *lista, Idoso *amigo){
 
 	if (lista == NULL)
 	{
-		ListIdoso* lista = (ListIdoso*)malloc(sizeof(ListIdoso));
+		lista = (ListAmigos*)malloc(sizeof(ListAmigos));
 		lista->prim = NULL;
 		lista->ult = NULL;
 	}
@@ -127,6 +126,8 @@ void insereAmigoNaLista(ListAmigos *lista, Idoso *amigo){
       }
       p->prox = nova;
       lista->ult = nova;
+
+	  
     }
 }
 
@@ -164,7 +165,7 @@ void retiraIdoso(ListIdoso* lista, char *nome){
     }
 
     if(p == NULL){
-      printf("Idoso n�o encontrado\n");
+      printf("Idoso nao encontrado\n");
       exit(1);
     }
 
@@ -253,6 +254,12 @@ void imprimeListIdoso(ListIdoso* lista){
 
 
 void imprimeListAmigos(ListAmigos *listAmigos){
+
+	if (listAmigos == NULL)
+	{
+		return;
+	}
+	
   CelIdoso* p;
   int i = 1;
   printf("LISTA DE AMIGOS:\n");
