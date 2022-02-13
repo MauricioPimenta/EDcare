@@ -7,7 +7,9 @@ typedef struct listAmigos ListAmigos;
 
 #include "Idoso.h"
 
-ListIdoso* CriaListaIdoso();
+//ListIdoso* CriaListaIdoso(void);
+
+ListAmigos* CriaListAmigos(void);
 
 //  Inicializa a lista de idoso
 //  inputs: string com o nome do arquivo com os dados
