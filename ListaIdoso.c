@@ -28,6 +28,13 @@ struct listAmigos{
 	return lista;
 } */
 
+ListAmigos* CriaListAmigos(void){
+    ListAmigos* lista = (ListAmigos*)malloc(sizeof(ListAmigos));
+    lista->prim = NULL;
+    lista->ult = NULL;
+    return lista;
+}
+
 
 ListIdoso* inicializaListIdoso(char* arquivo){
   ListIdoso* lista = (ListIdoso*)malloc(sizeof(ListIdoso));
@@ -112,8 +119,8 @@ void insereAmigoNaLista(ListAmigos *lista, Idoso *amigo){
 		lista->prim = NULL;
 		lista->ult = NULL;
 	}
-		
-	
+
+
     if(lista->prim == NULL){
       lista->prim = nova;
       lista->ult = nova;
@@ -127,7 +134,7 @@ void insereAmigoNaLista(ListAmigos *lista, Idoso *amigo){
       p->prox = nova;
       lista->ult = nova;
 
-	  
+
     }
 }
 
@@ -259,7 +266,7 @@ void imprimeListAmigos(ListAmigos *listAmigos){
 	{
 		return;
 	}
-	
+
   CelIdoso* p;
   int i = 1;
   printf("LISTA DE AMIGOS:\n");
@@ -267,7 +274,6 @@ void imprimeListAmigos(ListAmigos *listAmigos){
     printf("Amigo %d: %s\n", i, retornaNomeIdoso(p->idoso));
   }
 }
-
 
 
 
