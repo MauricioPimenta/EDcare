@@ -4,19 +4,28 @@
 #include <sys/types.h> //Diretorio
 #include <sys/stat.h> //Diretorio
 
-#include "ListaCuidadores.h"
 
-struct CelCuidador{
+#include "ListaCuidadores.h"
+#include "Idoso.h"
+
+
+struct celCuidador
+{
     Cuidador* cuidador;
     CelCuidador *prox;
 };
 
-struct listCuidador{
+struct listCuidador
+{
     CelCuidador *prim;
     CelCuidador *ult;
 };
 
-
+//  Funcao que inicializa a lista de cuidadores
+//  inputs: nenhum
+//  output: ponteiro para a estrutura ListCuidador
+//  pre-condicao: nenhuma
+//  pos-condicao: ponteiro de retorno existe e esta alocado
 ListCuidador* inicializaListaCuidador(){
   ListCuidador* lista = (ListCuidador*)malloc(sizeof(ListCuidador));
 
@@ -26,27 +35,28 @@ ListCuidador* inicializaListaCuidador(){
   return lista;
 }
 
+//  Funcao que preenche a lista de cuidadores
+//  inputs: string com o nome do arquivo com os nomes dos cuidadores
+//  output: nenhum
+//  pre-condicao: lista de cuidadores cujos nomes sao separados com ";", todos dispostos na primeira linha do arquivo de texto
+//  pos-condicao: lista de cuidadores criada
 
-
-
-
-
-// só coloquei os cuidadores em si, sem relações com nada
-ListCuidador *preencheListCuidador(char* arquivo){
+// so coloquei os cuidadores em si, sem relacoes com nada
+ListCuidador *preencheListCuidador(char* arquivo)
+{
   ListCuidador *lista = inicializaListaCuidador();
 
-  CelCuidador* p = lista->prim;
+  //CelCuidador* p = lista->prim;
 
   // Abre o arquivo para leitura
 
   FILE *fp = fopen(arquivo, "r");
-  char conteudo[70];
+  char conteudo[10000];
 
-   if (fp == NULL){
+   if (fp == NULL)
     printf("Nao foi possivel abrir o arquivo. %s\n", arquivo);
-  }
 
-  // Pega informações somente da primeira linha
+  // Pega informacoes somente da primeira linha
 
   fscanf(fp, "%[^\n]\n", conteudo);
 
@@ -66,92 +76,12 @@ ListCuidador *preencheListCuidador(char* arquivo){
   return lista;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/*
-void preencheListCuidador(ListIdoso* listaIdoso, char* arquivo){
-  listCuidador* lista = (ListCuidador*)malloc(sizeof(ListCuidador));
-  lista->prim = NULL;
-  lista->ult = NULL;
-
-  CelCuidador* p;
-
-  // ------ Leitura do arquivo ------
-
-  char *diretorio = '\0';
-
-  FILE *fp = fopen(arquivo, "r");
-  char conteudo[10000] = "\0";
-
-   if (fp == NULL){
-    printf("Erro.\n");
-  }
-
-  // Pega informações somente da primeira linha
-
-  fscanf(fp, "%[^\n]\n", conteudo);
-  char* nome = strtok(conteudo, ";");
-
-  //colocando os cuidadores na lista
-  while( nome != NULL ) {
-        insereNovoCuidador(lista, criaCuidador(nome));
-
-        nome = strtok(NULL, ";");
-  }
-
-
-  // lendo as linhas seguintes
-  fscanf(fp, "%[^EOF]", conteudo);
-
-  char* test = NULL;
-  char* linha;
-  int i = 0, j = 0, k = 0;
-  char nome[20];
-  char num[10];
-  char musica[50];
-  int qtd = 0;
-
- // ------ Coleta de informacao de cada linha ------
-
-  for (linha = strtok_r(conteudo, "\n", &test); linha != NULL; linha = strtok_r(NULL, "\n", &test)){ //for de linha em linha
-
-        for(i = 0; linha[i] != ';'; i++){
-          nome[i] = linha[i];
-        }
-        nome[i] = '\0';
-
-        for(i += 1, j = 0; linha[i] != ';'; i++, j++){
-          num[j] = linha[i];
-        }
-        num[j] = '\0';
-
-        qtd = atof(num);
-
-        for (j = 0; j < atof(num); j++){
-          for(i += 1, k = 0; linha[i] != ';' && linha[i] != '\0'; i++, k++){
-            musica[k] = linha[i];
-          }
-          musica[k] = '\0';
-
-          // ------ Insercao nas listas ------
-
-          p = inserePlaylist(retornaListPlaylist(buscaUsuario(listaUsuarios,nome)), musica);
-
-          criaListaMusica(retornaListMusica(retornaPlaylistaDaCelula(p)), musica);
-        }
-  }
-  fclose(fp);
+CelCuidador* CriaCelulaCuidador(Cuidador* cuidador){
+    CelCuidador* nova = (CelCuidador*)malloc(sizeof(CelCuidador));
+    nova->cuidador = cuidador;
+    nova->prox = NULL;
+    return nova;
 }
-*/
 
 Cuidador* retornaCuidadorDaCelula(CelCuidador* p){
   return p->cuidador;
@@ -163,6 +93,10 @@ CelCuidador *retornaProximoCuidador(CelCuidador *p){
 
 CelCuidador *retornaPrimeiroCuidador(ListCuidador *lista){
   return lista->prim;
+}
+
+CelCuidador* retornaUltimoCuidador(ListCuidador* lista){
+    return lista->ult;
 }
 
 CelCuidador* insereCuidador (ListCuidador* lista, char* nome){
@@ -208,7 +142,7 @@ void retiraCuidadorDaLista(ListCuidador* lista, CelCuidador* cuidador){
     }
 
     if(p == NULL){
-      printf("Item não encontrado.\n");
+      printf("Item nï¿½o encontrado.\n");
       exit(1);
     }
 
@@ -254,6 +188,10 @@ CelCuidador* buscaCuidadorERetornaCelula(ListCuidador* lista, char* nome){
     return NULL;
 }
 
+ListCuidador *retornaListCuidadores(Idoso *idoso){
+  return idoso->cuidadores;
+}
+
 void destroiListCuidador(ListCuidador *lista){
   CelCuidador* p;
   CelCuidador* t;
@@ -272,9 +210,13 @@ void destroiListCuidador(ListCuidador *lista){
 void imprimeListCuidador(ListCuidador* lista){
   CelCuidador* p;
   int i = 1;
-  printf("LISTA DE CUIDADORES:\n");
+  printf("----------LISTA DE CUIDADORES:----------\n");
   for (p = lista->prim; p != NULL; p = p->prox, i++){
     printf("Cuidador %d\n", i);
     imprimeCuidador(p->cuidador);
   }
 }
+
+
+
+
