@@ -38,6 +38,9 @@ int retornaLatitude(Cuidador* cuidador);
 //  pos-condicao: cuidador nao e modificado
 int retornaLongitude(Cuidador* cuidador);
 
+void InsereMedidasCuidador(Cuidador* cuidador, int linhaArquivo, char* arquivo);
+
+
 //  Imprime cuidador
 //  inputs: ponteiro para cuidador
 //  output: nenhum
@@ -46,3 +49,4 @@ int retornaLongitude(Cuidador* cuidador);
 void imprimeCuidador(Cuidador* cuidador);
 
 #endif
+

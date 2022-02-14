@@ -50,7 +50,7 @@ ListCuidador *preencheListCuidador(char* arquivo)
   // Abre o arquivo para leitura
 
   FILE *fp = fopen(arquivo, "r");
-  char conteudo[70];
+  char conteudo[10000];
 
    if (fp == NULL)
     printf("Nao foi possivel abrir o arquivo. %s\n", arquivo);
