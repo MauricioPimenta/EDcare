@@ -135,6 +135,7 @@ void imprimeIdoso(Idoso* idoso){
 
 
 
+
 void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* listaCuidador){
     // FILE* fp = fopen(arquivo, "r");
 
@@ -153,15 +154,15 @@ void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* 
     // int i, j;
 
     // while(nomes != NULL){
-    //     for(i = 0; nomes[i] != ';'; i++){
+    //     for(i = 0; nomes[i] != ';'; i++){  //for para pegar o nome do idoso na linha
     //     nomeIdoso[i] = nomes[i];
     //     }
-    //     nomeIdoso[i] = '\0';
+    //     nomeIdoso[i] = '\0';  //nome do idoso com terminador
 
     //     //parei aqui------------------------------------------------------------------------------------------------------ erro abaixo, nesta função
-    //     for(i += 1, j = 0; nomes[i] != '\n'; i++, j++){  //pelo que to pensando nao contempla o ultimo cuidador da linha
-    //         if(nomes[i] == ';'){
-    //             nomeCuidador[j] = '\0';
+    //     for(i += 1, j = 0; nomes[i] != '\n'; i++, j++){  //for() indo do nome do primeiro cuidador depois do idoso até o final da linha
+    //         if(nomes[i] == ';'){  //se acaba o nome do cuidador, entra no if()
+    //             nomeCuidador[j] = '\0';  //no lugar do ";" coloca '\0' pra terminar o nome do cuidador corretamente
 
 
     //             Idoso* idoso = buscaIdoso(listaIdoso, nomeIdoso);
@@ -169,38 +170,49 @@ void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* 
 
     //             InsereCuidadorNoIdoso(idoso, cuidador);
 
-    //             j = 0;
+    //             j = 0;  //zerando j para preencher um novo nome de cuidador
     //         }
     //         else{
     //             nomeCuidador[j] = nomes[i];
     //         }
     //     }
+    //     if(nomes[i] == '\n'){  //só entra aqui se for o ultimo cuidador, para colocar '\0' e inserir o respectivo cuidador no respectivo idoso
+    //         nomeCuidador[j] = '\0';
+
+    //         Idoso* idoso = buscaIdoso(listaIdoso, nomeIdoso);
+    //         Cuidador* cuidador = buscaCuidador(listaCuidador, nomeCuidador);
+
+    //         InsereCuidadorNoIdoso(idoso, cuidador);
+    //     }
+
     //     nomes = strtok(NULL, "\n");
     // }
 }
 
 
 
-void InsereCuidadorNoIdoso(Idoso* idoso, Cuidador* cuidador){
-    // CelCuidador* nova = criaCuidador();
-    // nova->cuidador = cuidador;
-    // nova->prox = NULL;
 
-    // if(idoso->cuidadores->prim == NULL){
-    //   idoso->cuidadores->prim = nova;
-    //   idoso->cuidadores->ult = nova;
+
+void InsereCuidadorNoIdoso(Idoso* idoso, Cuidador* cuidador){
+    // CelCuidador* nova = CriaCelulaCuidador(cuidador);
+
+    // if(retornaPrimeiroCuidador(retornaListCuidadores(idoso)) == NULL){
+    //     CelCuidador* cuid1 = retornaPrimeiroCuidador(retornaListCuidadores(idoso));
+    //     cuid1 = nova;
+    //     //retornaUltimoCuidador(retornaListCuidadores(idoso)) = nova;
     // }
 
     // else{
-    //   CelCuidador *p = idoso->cuidadores->prim;
+    //   CelCuidador *p = retornaPrimeiroCuidador(retornaListCuidadores(idoso));
 
     //   while(p->prox != NULL){
     //     p = p->prox;
     //   }
     //   p->prox = nova;
-    //   idoso->cuidadores->ult = nova;
+    //   retornaUltimoCuidador(retornaListCuidadores(idoso)) = nova;
     // }
 }
+
 
 
 
@@ -216,7 +228,7 @@ void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo){
     // FILE *fp = fopen(arquivo, "r");
 
     // if(fp == NULL){
-    //     printf("Erro no arquivo de medidas de %s.\n", getNomeIdoso(idoso));
+    //     printf("Erro no arquivo de medidas de %s.\n", retornaNomeIdoso(idoso));
     // }
 
     // if(linhaArquivo == 1){
@@ -275,5 +287,6 @@ void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo){
 
     // fclose(fp);
 }
+
 
 
