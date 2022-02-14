@@ -52,8 +52,10 @@ ListCuidador *preencheListCuidador(char* arquivo)
   FILE *fp = fopen(arquivo, "r");
   char conteudo[10000];
 
-   if (fp == NULL)
+   if (fp == NULL){
     printf("Nao foi possivel abrir o arquivo. %s\n", arquivo);
+	return NULL;
+   }
 
   // Pega informacoes somente da primeira linha
 

@@ -6,6 +6,8 @@ typedef struct listIdoso ListIdoso;
 typedef struct listAmigos ListAmigos;
 
 #include "Idoso.h"
+#include "Cuidador.h"
+#include "ListaCuidadores.h"
 
 //ListIdoso* CriaListaIdoso(void);
 

@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "Idoso.h"
+#include "Cuidador.h"
 #include "ListaCuidadores.h"
 
 
@@ -39,7 +40,7 @@ ListAmigos *retornaListAmigosIdoso(Idoso *idoso){
   return idoso->amigos;
 }
 
-ListCuidadores *retornaListCuidadores(Idoso *idoso){
+ListCuidador *retornaListCuidadores(Idoso *idoso){
   return idoso->cuidadores;
 }
 
@@ -65,7 +66,7 @@ void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* 
     char* nomes = strtok(conteudo, "\n");
     char nomeIdoso[10000], nomeCuidador[10000];
 
-    int i, j, k;
+    int i, j;
 
     while(nomes != NULL){
         for(i = 0; nomes[i] != ';'; i++){
@@ -75,7 +76,7 @@ void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* 
 
         //parei aqui------------------------------------------------------------------------------------------------------ erro abaixo, nesta função
         for(i += 1, j = 0; nomes[i] != '\n'; i++, j++){  //pelo que to pensando nao contempla o ultimo cuidador da linha
-            if(nomes[i] == ";"){
+            if(nomes[i] == ';'){
                 nomeCuidador[j] = '\0';
 
 

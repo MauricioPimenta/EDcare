@@ -4,7 +4,8 @@
 typedef struct idoso Idoso;
 
 //#include "ListaAmigos.h"
-//#include "ListaCuidadores.h"
+#include "Cuidador.h"
+#include "ListaCuidadores.h"
 #include "ListaIdoso.h"
 
 
@@ -16,15 +17,6 @@ typedef struct idoso Idoso;
 
 Idoso *criaIdoso(char *nome);
 
-//  Libera memória alocada para o idoso
-//  inputs: ponteiro para a estrutura Idoso
-//  output: nenhum
-//  pre-condicao: idoso existe
-//  pos-condicao: a memória alocada para a estrutura Idoso foi liberada
-//
-void destroiIdoso(Idoso *idoso);
-
-
 //  Retorna o nome do idoso
 //  inputs: ponteiro para a estrutura Idoso
 //  output: nome do idoso
@@ -33,23 +25,39 @@ void destroiIdoso(Idoso *idoso);
 
 char *retornaNomeIdoso(Idoso *idoso);
 
-//  Retona a lista de cuidadores do idoso
-//  inputs: ponteiro para a estrutura Idoso
-//  output: ponteiro para a estrutura ListCuidadores
-//  pre-condicao: idoso precisa existir
-//  pos-condicao: idoso nao é modificado e estrutura dos cuidadores disponível
 
-//ListCuidadores *retornaListCuidadores(Idoso *idoso);
 
 //  Retorna Lista de amigos do idoso
 //  inputs: ponteiro para estrutura Idoso
 //  output: ponteiro para estrutura ListAmigos
 //  pre-condicao: idoso precisa existir
 //  pos-condicao: idoso nao é alterado e lista de amigos disponível
-
 ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
 
+
+//  Retona a lista de cuidadores do idoso
+//  inputs: ponteiro para a estrutura Idoso
+//  output: ponteiro para a estrutura ListCuidadores
+//  pre-condicao: idoso precisa existir
+//  pos-condicao: idoso nao é modificado e estrutura dos cuidadores disponível
+
+ListCuidador *retornaListCuidadores(Idoso *idoso);
+
+
+void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* listaCuidador);
+
+void InsereCuidadorNoIdoso(Idoso* idoso, Cuidador* cuidador);
+
 void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
+
+//  Libera memória alocada para o idoso
+//  inputs: ponteiro para a estrutura Idoso
+//  output: nenhum
+//  pre-condicao: idoso existe
+//  pos-condicao: a memória alocada para a estrutura Idoso foi liberada
+//
+void destroiIdoso(Idoso *idoso);
+
 
 
 //  Imprime idoso

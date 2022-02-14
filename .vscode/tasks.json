@@ -16,7 +16,7 @@
 				"ListaCuidadores.c",
 				"ListaCuidadores.h",
 				"-Wall",
-				"-Werror",
+				//"-Werror",
                 "-fdiagnostics-color=always",
                 "-g",
             ],
