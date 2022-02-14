@@ -93,24 +93,24 @@ int getNumFebresBaixas(Idoso* idoso){
  * 
  */
 
-void setLatitudeIdoso(Idoso *idoso, float l){
-	idoso->latitude = l;
+void setLatitudeIdoso(Idoso *idoso, float lat){
+	idoso->latitude = lat;
 }
 
-void setLongitudeIdoso(Idoso *idoso, float l){
-	idoso->longitude = l;
+void setLongitudeIdoso(Idoso *idoso, float longit){
+	idoso->longitude = longit;
 }
 
 void setTemperaturaIdoso(Idoso* idoso, float temp){
 	idoso->temperatura = temp;
 }
 
-void setQuedaIdoso(Idoso* idoso, int q){
-	idoso->queda = q;
+void setQuedaIdoso(Idoso* idoso, int queda){
+	idoso->queda = queda;
 }
 
-int getNumFebresBaixas(Idoso* idoso){
-	return idoso->numFebresBaixas;
+void setNumFebresBaixas(Idoso* idoso, int febres){
+	idoso->numFebresBaixas = febres;
 }
 
 
