@@ -1,24 +1,30 @@
 #ifndef IDOSO_H_
 #define IDOSO_H_
 
+//typedef struct celCuidador CelCuidador;
+//typedef struct listCuidador ListCuidador;
 typedef struct idoso Idoso;
 
-//#include "ListaCuidadores.h"
+//#include "ListaAmigos.h"
+#include "ListaCuidadores.h"
+#include "ListaIdoso.h"
+
+
 
 
 //  Cria estrutura idoso
 //  inputs: nome do idoso
 //  output: ponteiro para a estrutura Idoso
-//  pre-condicao: não existe
+//  pre-condicao: nÃ£o existe
 //  pos-condicao: ponteiro da estrutura alocado pronto para uso
 
 Idoso *criaIdoso(char *nome);
 
-//  Libera memória alocada para o idoso
+//  Libera memÃ³ria alocada para o idoso
 //  inputs: ponteiro para a estrutura Idoso
 //  output: nenhum
 //  pre-condicao: idoso existe
-//  pos-condicao: a memória alocada para a estrutura Idoso foi liberada
+//  pos-condicao: a memÃ³ria alocada para a estrutura Idoso foi liberada
 //
 void destroiIdoso(Idoso *idoso);
 
@@ -27,27 +33,30 @@ void destroiIdoso(Idoso *idoso);
 //  inputs: ponteiro para a estrutura Idoso
 //  output: nome do idoso
 //  pre-condicao: idoso existe
-//  pos-condicao: idoso nao é modificado e nome do idoso disponível
+//  pos-condicao: idoso nao Ã© modificado e nome do idoso disponÃ­vel
 
 char *retornaNomeIdoso(Idoso *idoso);
 
-//  Retona a lista de cuidadores do idoso
-//  inputs: ponteiro para a estrutura Idoso
-//  output: ponteiro para a estrutura ListCuidadores
-//  pre-condicao: idoso precisa existir
-//  pos-condicao: idoso nao é modificado e estrutura dos cuidadores disponível
 
-//ListCuidadores *retornaListCuidadores(Idoso *idoso);
 
 //  Retorna Lista de amigos do idoso
 //  inputs: ponteiro para estrutura Idoso
 //  output: ponteiro para estrutura ListAmigos
 //  pre-condicao: idoso precisa existir
-//  pos-condicao: idoso nao é alterado e lista de amigos disponível
+//  pos-condicao: idoso nao Ã© alterado e lista de amigos disponÃ­vel
 
-//ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
+ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
 
-//  Imprime Usuario
+void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
+
+void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* listaCuidador);
+
+void InsereCuidadorNoIdoso(Idoso* idoso, Cuidador* cuidador);
+
+//int ContadorDeTokensLinha(char* linha);
+
+
+//  Imprime idoso
 //  inputs: ponteiro para Usuario
 //  output: nenhum
 //  pre-condicao: Usuario precisa existir
@@ -58,17 +67,4 @@ void imprimeIdoso(Idoso* usuario);
 
 
 
-
-
-/*Retorna Lista de musicas do Usuario
- * inputs: ponteiro para struct Usuario
- * output: ponteiro para struct ListMusic
- * pre-condicao: Usuario precisa existir
- * pos-condicao: Usuario nao eh alterado
- */
-//ListMusica *retornaPlaylistUsuario(Usuario *usuario);
-
-
-
 #endif
-
