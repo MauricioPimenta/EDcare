@@ -45,6 +45,21 @@ ListCuidador *retornaListCuidadores(Idoso *idoso){
 }
 
 
+void destroiIdoso(Idoso *idoso){
+  free(idoso->nome);
+  //destroiListCuidadores(idoso->cuidadores);
+  //destroiListaAmigos(idoso->amigos);
+
+  free(idoso);
+}
+
+void imprimeIdoso(Idoso* idoso){
+  printf("Nome: %s\n", idoso->nome);
+  //imprimeListCuidadores(idoso->cuidadores);
+  imprimeListAmigos(idoso->amigos);
+  printf("%f, %f, %f, %i", idoso->temperatura, idoso->latitude, idoso->longitude, idoso->queda);
+}
+
 
 
 
@@ -98,7 +113,7 @@ void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* 
 
 
 void InsereCuidadorNoIdoso(Idoso* idoso, Cuidador* cuidador){
-    CelCuidador* nova = (CelCuidador*)malloc(sizeof(CelCuidador));
+    CelCuidador* nova = criaCuidador();
     nova->cuidador = cuidador;
     nova->prox = NULL;
 
@@ -192,19 +207,4 @@ void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo){
     fclose(fp);
 }
 
-
-void destroiIdoso(Idoso *idoso){
-  free(idoso->nome);
-  //destroiListCuidadores(idoso->cuidadores);
-  //destroiListaAmigos(idoso->amigos);
-
-  free(idoso);
-}
-
-void imprimeIdoso(Idoso* idoso){
-  printf("Nome: %s\n", idoso->nome);
-  //imprimeListCuidadores(idoso->cuidadores);
-  imprimeListAmigos(idoso->amigos);
-  printf("%f, %f, %f, %i", idoso->temperatura, idoso->latitude, idoso->longitude, idoso->queda);
-}
 

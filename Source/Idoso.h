@@ -43,13 +43,6 @@ ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
 
 ListCuidador *retornaListCuidadores(Idoso *idoso);
 
-
-void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* listaCuidador);
-
-void InsereCuidadorNoIdoso(Idoso* idoso, Cuidador* cuidador);
-
-void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
-
 //  Libera memória alocada para o idoso
 //  inputs: ponteiro para a estrutura Idoso
 //  output: nenhum
@@ -66,6 +59,17 @@ void destroiIdoso(Idoso *idoso);
 //  pre-condicao: Usuario precisa existir
 //  pos-condicao: Usuario nao eh alterado
 void imprimeIdoso(Idoso* usuario);
+
+
+// Outras funcoes
+
+void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* listaCuidador);
+
+void InsereCuidadorNoIdoso(Idoso* idoso, Cuidador* cuidador);
+
+void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
+
+
 
 
 
