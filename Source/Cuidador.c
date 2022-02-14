@@ -24,69 +24,39 @@ Cuidador* criaCuidador(char* nome){
   return cuidador;
 }
 
-char* retornaNomeCuidador(Cuidador* cuidador){
+/*
+ * Retorna o Nome do Cuidador
+ */
+char* getNomeCuidador(Cuidador* cuidador){
   return cuidador->nome;
 }
 
-int retornaLatitude(Cuidador* cuidador){
+/*
+ * Retorna a Latitude do Cuidador
+ */
+int getLatitudeCuidador(Cuidador* cuidador){
   return cuidador->Latitude;
 }
 
-int retornaLongitude(Cuidador* cuidador){
+/*
+ * Retorna a Longitude do Cuidador
+ */
+int getLongitudeCuidador(Cuidador* cuidador){
   return cuidador->Longitude;
 }
 
-void InsereMedidasCuidador(Cuidador* cuidador, int linhaArquivo, char* arquivo){
+/*
+ * Modifca a Latitude do Cuidador
+ */
+void setLatitudeCuidador(Cuidador* c, float lat){
+	c->Latitude = lat;
+}
 
-    FILE *fp = fopen(arquivo, "r");
-
-    if(fp == NULL){
-        printf("Erro no arquivo de medidas de %s\n.", retornaNomeCuidador(cuidador));
-    }
-
-    if(linhaArquivo == 1){
-        char linha[100];
-        fscanf(fp, "%[^\n]\n", linha);  //le a linha de interesse
-        char* medida = strtok(linha, ";");  //separa as medidas da linha pelo separador ";"
-
-        int k = 0;  //auxilia na inserção das medidas nos campos corretos através das condicoes
-        while(medida != NULL){
-            k = k + 1;
-            if(k == 1){
-                cuidador->Latitude = atof(medida);
-            }
-            else{
-                cuidador->Longitude = atof(medida);
-            }
-
-            medida = strtok(NULL, ";");
-        }
-    }
-    else{
-        char linha[100];
-        int i;
-        for(i = 0; i < linhaArquivo - 1; i++){
-            fscanf(fp, "%[^\n]\n", linha);  //le até a ultima linha antes da linha de interesse
-        }
-
-        fscanf(fp, "%[^\n]\n", linha);  //le a linha de interesse
-        char* medida = strtok(linha, ";");  //separa as medidas da linha pelo separador ";"
-
-        int k = 0;  //auxilia na inserção das medidas nos campos corretos através das condicoes
-        while(medida != NULL){
-            k = k + 1;
-            if(k == 1){
-                cuidador->Latitude = atof(medida);
-            }
-            else{
-                cuidador->Longitude = atof(medida);
-            }
-
-            medida = strtok(NULL, ";");
-        }
-    }
-
-    fclose(fp);
+/*
+ * Modifca a Longitude do Cuidador
+ */
+void setLongitudeCuidador(Cuidador* c, float l){
+	c->Longitude = l;
 }
 
 void destroiCuidador(Cuidador* cuidador){

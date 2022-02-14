@@ -100,8 +100,8 @@ void insereAmizade(ListIdoso *listIdoso, char* amigo1, char* amigo2){
   idoso1 = buscaIdoso(listIdoso, amigo1);
   idoso2 = buscaIdoso(listIdoso, amigo2);
 
-  listAmigos1 = retornaListAmigosIdoso(idoso1);
-  listAmigos2 = retornaListAmigosIdoso(idoso2);
+  listAmigos1 = getListAmigosIdoso(idoso1);
+  listAmigos2 = getListAmigosIdoso(idoso2);
 
   insereAmigoNaLista(listAmigos1, idoso2);
   insereAmigoNaLista(listAmigos2, idoso1);
@@ -166,7 +166,7 @@ void retiraIdoso(ListIdoso* lista, char *nome){
   CelIdoso* p = lista->prim;
   CelIdoso* ant = NULL;
 
-    while (p != NULL && strcmp(retornaNomeIdoso(p->idoso), nome)){
+    while (p != NULL && strcmp(getNomeIdoso(p->idoso), nome)){
         ant = p;
         p = p->prox;
     }
@@ -200,7 +200,7 @@ void retiraIdoso(ListIdoso* lista, char *nome){
 
 Idoso *buscaIdoso(ListIdoso *lista, char *nome){
     CelIdoso* p = lista->prim;
-    while (p != NULL && strcmp(retornaNomeIdoso(p->idoso), nome)){
+    while (p != NULL && strcmp(getNomeIdoso(p->idoso), nome)){
         p = p->prox;
     }
     return p->idoso;
@@ -271,7 +271,7 @@ void imprimeListAmigos(ListAmigos *listAmigos){
   int i = 1;
   printf("LISTA DE AMIGOS:\n");
   for (p = listAmigos->prim; p != NULL; p = p->prox, i++){
-    printf("Amigo %d: %s\n", i, retornaNomeIdoso(p->idoso));
+    printf("Amigo %d: %s\n", i, getNomeIdoso(p->idoso));
   }
 }
 

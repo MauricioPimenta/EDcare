@@ -22,23 +22,31 @@ void destroiCuidador(Cuidador* cuidador);
 //  output: String - ponteiro para char
 //  pre-condicao: cuidador existe
 //  pos-condicao: cuidador nao e modificado
-char* retornaNomeCuidador(Cuidador* cuidador);
+char* getNomeCuidador(Cuidador* cuidador);
 
 //  Funcao que retorna a latitude do cuidador
 //  inputs: ponteiro para a estrutura cuidador
 //  output: inteiro com dados da latitude
 //  pre-condicao: cuidador existe
 //  pos-condicao: cuidador nao e modificado
-int retornaLatitude(Cuidador* cuidador);
+int getLatitudeCuidador(Cuidador* cuidador);
 
 //  Funcao que retorna a longitude do cuidador
 //  inputs: ponteiro para a estrutura cuidador
 //  output: inteiro com dados da longitude
 //  pre-condicao: cuidador existe
 //  pos-condicao: cuidador nao e modificado
-int retornaLongitude(Cuidador* cuidador);
+int getLongitudeCuidador(Cuidador* cuidador);
 
-void InsereMedidasCuidador(Cuidador* cuidador, int linhaArquivo, char* arquivo);
+/*
+ * Modifca a Latitude do Cuidador
+ */
+void setLatitudeCuidador(Cuidador* c, float lat);
+
+/*
+ * Modifca a Longitude do Cuidador
+ */
+void setLongitudeCuidador(Cuidador* c, float l);
 
 
 //  Imprime cuidador

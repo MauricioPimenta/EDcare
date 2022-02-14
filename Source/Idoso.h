@@ -17,14 +17,20 @@ typedef struct idoso Idoso;
 
 Idoso *criaIdoso(char *nome);
 
+
+/*****************************************************
+ *
+ * FUNCOES GET - RETORNAM UM ATRIBUTO DO IDOSO
+ * 
+ */
+
 //  Retorna o nome do idoso
 //  inputs: ponteiro para a estrutura Idoso
 //  output: nome do idoso
 //  pre-condicao: idoso existe
 //  pos-condicao: idoso nao é modificado e nome do idoso disponível
 
-char *retornaNomeIdoso(Idoso *idoso);
-
+char *getNomeIdoso(Idoso *idoso);
 
 
 //  Retorna Lista de amigos do idoso
@@ -32,7 +38,7 @@ char *retornaNomeIdoso(Idoso *idoso);
 //  output: ponteiro para estrutura ListAmigos
 //  pre-condicao: idoso precisa existir
 //  pos-condicao: idoso nao é alterado e lista de amigos disponível
-ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
+ListAmigos *getListAmigosIdoso(Idoso *idoso);
 
 
 //  Retona a lista de cuidadores do idoso
@@ -41,7 +47,41 @@ ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
 //  pre-condicao: idoso precisa existir
 //  pos-condicao: idoso nao é modificado e estrutura dos cuidadores disponível
 
-ListCuidador *retornaListCuidadores(Idoso *idoso);
+ListCuidador *getListCuidadores(Idoso *idoso);
+
+
+
+float getLatitudeIdoso(Idoso *idoso);
+
+float getLongitudeIdoso(Idoso *idoso);
+
+float getTemperaturaIdoso(Idoso* idoso);
+
+int getQuedaIdoso(Idoso* idoso);
+
+int getNumFebresBaixas(Idoso* idoso);
+
+
+/******************************************************************************/
+
+
+
+
+/*****************************************************
+ *
+ * FUNCOES SET - MODIFICAM UM ATRIBUTO DO IDOSO
+ * 
+ */
+
+
+
+
+
+
+
+
+
+
 
 //  Libera memória alocada para o idoso
 //  inputs: ponteiro para a estrutura Idoso
