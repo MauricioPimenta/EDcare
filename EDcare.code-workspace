@@ -6,7 +6,8 @@
 	],
 	"settings": {
 		"files.associations": {
-			"*.h": "c"
+			"*.h": "c",
+			"cstdio": "c"
 		}
 	},
 	"launch": {

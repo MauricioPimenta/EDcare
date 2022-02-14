@@ -22,15 +22,18 @@
 
 int main()
 {
+	// SETUP - Le arquivos de entrada e armazena Idosos, cria suas dependências, etc
+	//		 - Inicializa os cuidadores cadastrados e define as dependências entre
+	//			idosos e cuidadores.
 
     printf("Criando lista de idosos...\n");
     ListIdoso *listaIdosos = inicializaListIdoso ( "./Entradas/apoio.txt" );
 	imprimeListIdoso(listaIdosos);
 
     printf("Preenchendo listas de cuidadores...\n");
-   // ListCuidador *listaCuidadores = preencheListCuidador("./Entrada/cuidadores.txt");
+	ListCuidador *listaCuidadores = preencheListCuidador("./Entradas/cuidadores.txt");
 
-
+	imprimeListCuidador(listaCuidadores);
 
 
 
