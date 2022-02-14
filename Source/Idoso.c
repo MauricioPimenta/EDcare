@@ -137,88 +137,58 @@ void imprimeIdoso(Idoso* idoso){
 
 
 void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* listaCuidador){
-    // FILE* fp = fopen(arquivo, "r");
+    FILE* fp = fopen(arquivo, "r");
 
-    // if(fp == NULL){
-    //     printf("Arquivo invalido.\n");
-    // }
+    if(fp == NULL){
+        printf("Arquivo invalido.\n");
+    }
 
-    // char conteudo[10000];
-    // fscanf(fp, "%[^\n]\n", conteudo);  //fazendo isso para ignorar a primeira linha
+    char conteudo[10000];
+    fscanf(fp, "%[^\n]\n", conteudo);  //fazendo isso para ignorar a primeira linha
 
-    // fscanf(fp, "%[^EOF]", conteudo);  //lendo da segunda linha ate o final
+    fscanf(fp, "%[^EOF]", conteudo);  //lendo da segunda linha ate o final
 
-    // char* nomes = strtok(conteudo, "\n");
-    // char nomeIdoso[10000], nomeCuidador[10000];
+    char* nomes = strtok(conteudo, "\n");
+    char nomeIdoso[10000], nomeCuidador[10000];
 
-    // int i, j;
+    int i, j;
 
-    // while(nomes != NULL){
-    //     for(i = 0; nomes[i] != ';'; i++){  //for para pegar o nome do idoso na linha
-    //     nomeIdoso[i] = nomes[i];
-    //     }
-    //     nomeIdoso[i] = '\0';  //nome do idoso com terminador
+    while(nomes != NULL){
+        for(i = 0; nomes[i] != ';'; i++){  //for para pegar o nome do idoso na linha
+        nomeIdoso[i] = nomes[i];
+        }
+        nomeIdoso[i] = '\0';  //nome do idoso com terminador
 
-    //     //parei aqui------------------------------------------------------------------------------------------------------ erro abaixo, nesta função
-    //     for(i += 1, j = 0; nomes[i] != '\n'; i++, j++){  //for() indo do nome do primeiro cuidador depois do idoso até o final da linha
-    //         if(nomes[i] == ';'){  //se acaba o nome do cuidador, entra no if()
-    //             nomeCuidador[j] = '\0';  //no lugar do ";" coloca '\0' pra terminar o nome do cuidador corretamente
+		i++;
+        //parei aqui----------------------------------------------------------------------------------------- erro abaixo, nesta função
+        for(j = 0; nomes[i] != '\n'; i++, j++){  //for() indo do nome do primeiro cuidador depois do idoso até o final da linha
+            if(nomes[i] == ';'){  //se acaba o nome do cuidador, entra no if()
+                nomeCuidador[j] = '\0';  //no lugar do ";" coloca '\0' pra terminar o nome do cuidador corretamente
 
 
-    //             Idoso* idoso = buscaIdoso(listaIdoso, nomeIdoso);
-    //             Cuidador* cuidador = buscaCuidador(listaCuidador, nomeCuidador);
+                Idoso* idoso = buscaIdoso(listaIdoso, nomeIdoso);
+                Cuidador* cuidador = buscaCuidador(listaCuidador, nomeCuidador);
 
-    //             InsereCuidadorNoIdoso(idoso, cuidador);
+                insereNovoCuidador(idoso->cuidadores, cuidador);
 
-    //             j = 0;  //zerando j para preencher um novo nome de cuidador
-    //         }
-    //         else{
-    //             nomeCuidador[j] = nomes[i];
-    //         }
-    //     }
-    //     if(nomes[i] == '\n'){  //só entra aqui se for o ultimo cuidador, para colocar '\0' e inserir o respectivo cuidador no respectivo idoso
-    //         nomeCuidador[j] = '\0';
+                j = 0;  //zerando j para preencher um novo nome de cuidador
+            }
+            else{
+                nomeCuidador[j] = nomes[i];
+            }
+        }
+        if(nomes[i] == '\n'){  //só entra aqui se for o ultimo cuidador, para colocar '\0' e inserir o respectivo cuidador no respectivo idoso
+            nomeCuidador[j] = '\0';
 
-    //         Idoso* idoso = buscaIdoso(listaIdoso, nomeIdoso);
-    //         Cuidador* cuidador = buscaCuidador(listaCuidador, nomeCuidador);
+            Idoso* idoso = buscaIdoso(listaIdoso, nomeIdoso);
+            Cuidador* cuidador = buscaCuidador(listaCuidador, nomeCuidador);
 
-    //         InsereCuidadorNoIdoso(idoso, cuidador);
-    //     }
+            insereNovoCuidador(idoso->cuidadores, cuidador);
+        }
 
-    //     nomes = strtok(NULL, "\n");
-    // }
+        nomes = strtok(NULL, "\n");
+    }
 }
-
-
-
-
-
-void InsereCuidadorNoIdoso(Idoso* idoso, Cuidador* cuidador){
-    // CelCuidador* nova = CriaCelulaCuidador(cuidador);
-
-    // if(retornaPrimeiroCuidador(retornaListCuidadores(idoso)) == NULL){
-    //     CelCuidador* cuid1 = retornaPrimeiroCuidador(retornaListCuidadores(idoso));
-    //     cuid1 = nova;
-    //     //retornaUltimoCuidador(retornaListCuidadores(idoso)) = nova;
-    // }
-
-    // else{
-    //   CelCuidador *p = retornaPrimeiroCuidador(retornaListCuidadores(idoso));
-
-    //   while(p->prox != NULL){
-    //     p = p->prox;
-    //   }
-    //   p->prox = nova;
-    //   retornaUltimoCuidador(retornaListCuidadores(idoso)) = nova;
-    // }
-}
-
-
-
-
-
-
-
 
 
 
