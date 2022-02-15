@@ -23,14 +23,24 @@
  * Definição da Estrutura do TAD Idoso
  */
 struct idoso{
-  char *nome;
-  ListAmigos *amigos;
-  ListCuidador *cuidadores;
-  float latitude;
-  float longitude;
-  float temperatura;
-  bool queda;
-  int numFebresBaixas;
+	char *nome; // Nome e principal identificador do idoso
+
+	// Listas de amigos e cuidadores
+	ListAmigos *amigos;
+	ListCuidador *cuidadores;
+
+	// Atributos para guardar as informações do idoso
+	float latitude;
+	float longitude;
+	float temperatura;
+	bool queda;
+	int numFebresBaixas;
+
+	// Arquivos de entrada e saida para leitura dos dados e ações realizadas
+	char *strFileIn;
+	char *strFileOut;
+	FILE *fileIn;
+	FILE *fileOut;
 };
 
 //  Cria estrutura idoso
@@ -48,6 +58,10 @@ Idoso* criaIdoso(char *nome){
 	// Reserva espaço na memória e armazena o nome
 	Idoso* idoso = (Idoso*)malloc(sizeof(Idoso));
 	idoso->nome = strdup(nome);
+
+	// Define nome de arquivo de entrada
+	idoso->strFileIn = strcat(nome, ".txt");
+	idoso->strFileOut = strcat(nome, "-saida.txt");
 
 	// Cria as listas de amigos e Cuidadores
 	idoso->amigos = CriaListAmigos();
@@ -195,6 +209,33 @@ int getNumFebresBaixas(Idoso* idoso){
 	}
 	else
 		return idoso->numFebresBaixas;
+}
+
+//  Retona o nome do arquivo de entradas (infos) do idoso
+//  inputs: ponteiro para a estrutura Idoso
+//  output: string com o nome do arquivo
+//  pre-condicao: idoso precisa existir
+//  pos-condicao: idoso nao é modificado e nome do arquivo disponível
+//
+char* getNomeArquivoEntradaIdoso(Idoso* idoso){
+	if(idoso = NULL)
+		return NULL;
+	else
+		return idoso->strFileIn;
+}
+
+//  Retona o nome do arquivo de saidas (log) do idoso
+//  inputs: ponteiro para a estrutura Idoso
+//  output: string com o nome do arquivo
+//  pre-condicao: idoso precisa existir
+//  pos-condicao: idoso nao é modificado e nome do arquivo disponível
+//
+char* getNomeArquivoSaidaIdoso(Idoso* idoso){
+	if(idoso = NULL)
+		return NULL;
+	else
+		return idoso->strFileOut;
+
 }
 
 

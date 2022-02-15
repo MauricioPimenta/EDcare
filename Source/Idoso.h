@@ -91,6 +91,21 @@ bool getQuedaIdoso(Idoso* idoso);
 //
 int getNumFebresBaixas(Idoso* idoso);
 
+//  Retona o nome do arquivo de entradas (infos) do idoso
+//  inputs: ponteiro para a estrutura Idoso
+//  output: string com o nome do arquivo
+//  pre-condicao: idoso precisa existir
+//  pos-condicao: idoso nao é modificado e nome do arquivo disponível
+//
+char* getNomeArquivoEntradaIdoso(Idoso* idoso);
+
+//  Retona o nome do arquivo de saidas (log) do idoso
+//  inputs: ponteiro para a estrutura Idoso
+//  output: string com o nome do arquivo
+//  pre-condicao: idoso precisa existir
+//  pos-condicao: idoso nao é modificado e nome do arquivo disponível
+//
+char* getNomeArquivoSaidaIdoso(Idoso* idoso);
 
 /*****************************************************
  *
