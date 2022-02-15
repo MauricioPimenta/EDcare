@@ -17,6 +17,12 @@ Cuidador* criaCuidador(char* nome);
 //  pos-condicao: toda a memoria alocada para cuidador foi liberada
 void destroiCuidador(Cuidador* cuidador);
 
+
+/*****************************************************
+ *
+ * FUNCOES GET - RETORNAM UM ATRIBUTO DO CUIDADOR
+ * 
+ *****************************************************/
 //  Funcao que retorna o nome do cuidador
 //  inputs: ponteiro para a estrutura cuidador
 //  output: String - ponteiro para char
@@ -38,6 +44,14 @@ int getLatitudeCuidador(Cuidador* cuidador);
 //  pos-condicao: cuidador nao e modificado
 int getLongitudeCuidador(Cuidador* cuidador);
 
+
+
+/*****************************************************
+ *
+ * FUNCOES SET - MODIFICAM UM ATRIBUTO DO CUIDADOR
+ * 
+ *****************************************************/
+
 /*
  * Modifca a Latitude do Cuidador
  */
@@ -49,6 +63,12 @@ void setLatitudeCuidador(Cuidador* c, float lat);
 void setLongitudeCuidador(Cuidador* c, float l);
 
 
+
+/*****************************************************************************
+ * 
+ * OUTRAS FUNÇÕES
+ * 
+ *****************************************************************************/
 //  Imprime cuidador
 //  inputs: ponteiro para cuidador
 //  output: nenhum
