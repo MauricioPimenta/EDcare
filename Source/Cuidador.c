@@ -4,6 +4,7 @@
 
 #include "Cuidador.h"
 
+
 struct cuidador{
   char *nome;
   float Latitude;
@@ -59,11 +60,23 @@ void setLongitudeCuidador(Cuidador* c, float l){
 	c->Longitude = l;
 }
 
+
+//  Funcao que libera memoria alocada para o cuidador
+//  inputs: ponteiro para a estrutura cuidador
+//  output: nenhum
+//  pre-condicao: Cuidador existe
+//  pos-condicao: toda a memoria alocada para cuidador foi liberada
 void destroiCuidador(Cuidador* cuidador){
   free(cuidador->nome);
   free(cuidador);
 }
 
+
+//  Imprime cuidador
+//  inputs: ponteiro para cuidador
+//  output: nenhum
+//  pre-condicao: cuidador existe
+//  pos-condicao: cuidador nao e alterado
 void imprimeCuidador(Cuidador* cuidador){
   printf("\nNome: %s\n", cuidador->nome);
   printf("Posicao: %0.2f,%0.2f\n\n", cuidador->Latitude, cuidador->Longitude);

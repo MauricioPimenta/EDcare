@@ -27,6 +27,9 @@
  *  CABECALHO DE FUNCOES DO PROGRAMA
 */
 void InsereMedidasCuidador(Cuidador* cuidador, int linhaArquivo, char* arquivo);
+void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* listaCuidador);
+void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
+
 
 
 /*
