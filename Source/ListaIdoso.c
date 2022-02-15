@@ -30,25 +30,44 @@ struct listAmigos{
   CelIdoso *ult;
 };
 
+ListIdoso* CriaListaIdoso()
+{
+	ListIdoso* lista = (ListIdoso*)malloc(sizeof(ListIdoso));
+	lista->prim = NULL;
+	lista->ult = NULL;
+	return lista;
+}
 
 /***********************************************************
  *
  * FUNCOES GET - RETORNAM UM ATRIBUTO DA LISTA DE CUIDADORES
- * 
+ *
  ***********************************************************/
 CelIdoso *getPrimeiro(ListIdoso* lista){
+  if(lista == NULL){  //se não existir, retorna nada
+    return NULL;
+  }
   return lista->prim;
 }
 
 CelIdoso *getUltimo(ListIdoso* lista){
+  if(lista == NULL){  //se não existir, retorna nada
+    return NULL;
+  }
   return lista->ult;
 }
 
 CelIdoso *getProximo(CelIdoso* p){
+  if(p == NULL){  //se não existir, retorna nada
+    return NULL;
+  }
   return p->prox;
 }
 
 Idoso *getIdosoCelula(CelIdoso* p){
+  if(p == NULL){  //se não existir, retorna nada
+    return NULL;
+  }
   return p->idoso;
 }
 
@@ -56,10 +75,15 @@ Idoso *getIdosoCelula(CelIdoso* p){
 /***********************************************************
  *
  * FUNCOES SET - ATRIBUEM UM ATRIBUTO DA LISTA DE CUIDADORES
- * 
+ *
  ***********************************************************/
 
-void setAmizade(ListIdoso *listIdoso, char* amigo1, char* amigo2){
+void novaAmizade(ListIdoso *listIdoso, char* amigo1, char* amigo2){
+
+  if(listIdoso == NULL || amigo1 == NULL || amigo2 == NULL){  //se não existir, retorna nada
+    return(NULL);
+  }
+
   Idoso *idoso1, *idoso2;
   ListAmigos *listAmigos1, *listAmigos2;
 
@@ -69,12 +93,16 @@ void setAmizade(ListIdoso *listIdoso, char* amigo1, char* amigo2){
   listAmigos1 = getListAmigosIdoso(idoso1);
   listAmigos2 = getListAmigosIdoso(idoso2);
 
-  setAmigoNaLista(listAmigos1, idoso2);
-  setAmigoNaLista(listAmigos2, idoso1);
+  insereAmigoNaLista(listAmigos1, idoso2);
+  insereAmigoNaLista(listAmigos2, idoso1);
 
 }
 
-void setAmigoNaLista(ListAmigos *lista, Idoso *amigo){
+void insereAmigoNaLista(ListAmigos *lista, Idoso *amigo){
+    if(lista == NULL || amigo == NULL){  //se não existir, retorna nada
+        return(NULL);
+    }
+
     CelIdoso* nova = (CelIdoso*)malloc(sizeof(CelIdoso));
     nova->idoso = amigo;
     nova->prox = NULL;
@@ -105,7 +133,11 @@ void setAmigoNaLista(ListAmigos *lista, Idoso *amigo){
 }
 
 // Insere idoso na lista
-void setIdoso(ListIdoso* lista, Idoso *idoso){
+void insereIdoso(ListIdoso* lista, Idoso *idoso){  //se não existir, retorna nada
+    if(list == NULL || idoso == NULL){
+        return(NULL);
+    }
+
     CelIdoso* nova = (CelIdoso*)malloc(sizeof(CelIdoso));
     nova->idoso = idoso;
     nova->prox = NULL;
@@ -126,18 +158,6 @@ void setIdoso(ListIdoso* lista, Idoso *idoso){
 }
 
 
-
-
-
-
-/* ListIdoso* CriaListaIdoso()
-{
-	ListIdoso* lista = (ListIdoso*)malloc(sizeof(ListIdoso));
-	lista->prim = NULL;
-	lista->ult = NULL;
-	return lista;
-} */
-
 ListAmigos* CriaListAmigos(void){
     ListAmigos* lista = (ListAmigos*)malloc(sizeof(ListAmigos));
     lista->prim = NULL;
@@ -145,63 +165,12 @@ ListAmigos* CriaListAmigos(void){
     return lista;
 }
 
-ListIdoso* inicializaListIdoso(char* arquivo){
-  ListIdoso* lista = (ListIdoso*)malloc(sizeof(ListIdoso));
-  lista->prim = NULL;
-  lista->ult = NULL;
-
-  // Abre o arquivo para leitura
-
-  FILE *fp = fopen(arquivo, "r");
-  char conteudo[10000];
-
-   if (fp == NULL){
-    printf("Nao foi possivel abrir o arquivo. %s.\n", arquivo);
-  }
-
-  // Pega informações somente da primeira linha
-
-  fscanf(fp, "%[^\n]\n", conteudo);
-
-  char* nome = strtok(conteudo, ";");
-
-  while( nome != NULL ) {
-        setIdoso(lista, criaIdoso(nome));
-
-        nome = strtok(NULL, ";");
-  }
-
-  // Agora trabalhando com as informações(linhas) restantes
-
-  fscanf(fp, "%[^EOF]", conteudo);
-  char aux1[10000], aux2[10000];
-  int i = 0;
-  int j = 0;
-  nome = strtok(conteudo, "\n");
-  //pegando o primeiro nome da linha
-  while (nome != NULL){
-        for (i = 0; nome[i] != ';'; i++){ //pegando o primeiro nome da linha
-            aux1[i] = nome[i];
-        }
-        aux1[i] = '\0';
-        for (i += 1, j = 0; nome[i] != '\0'; i++, j++){ //pegando o segundo nome da linha
-            aux2[j] = nome[i];
-        }
-        aux2[j] = '\0';
-
-        setAmizade(lista, aux1, aux2);
-        nome = strtok(NULL, "\n");
-  }
-
-  fclose(fp);
-
-  lista->ult->prox = NULL;
-
-  return lista;
-}
-
 // Retira idoso da lista
 void retiraIdoso(ListIdoso* lista, char *nome){
+  if(lista == NULL || nome == NULL){  //se não existir, retorna nada
+    return NULL;
+  }
+
   CelIdoso* p = lista->prim;
   CelIdoso* ant = NULL;
 
@@ -236,6 +205,10 @@ void retiraIdoso(ListIdoso* lista, char *nome){
 }
 
 Idoso *buscaIdoso(ListIdoso *lista, char *nome){
+    if(lista == NULL || nome == NULL){  //se não existir, retorna nada
+        return NULL;
+    }
+
     CelIdoso* p = lista->prim;
     while (p != NULL && strcmp(getNomeIdoso(p->idoso), nome)){
         p = p->prox;
@@ -244,6 +217,10 @@ Idoso *buscaIdoso(ListIdoso *lista, char *nome){
 }
 
 void destroiListIdoso(ListIdoso* lista){
+  if(lista == NULL){  //se não existir, retorna nada
+    return NULL;
+  }
+
   CelIdoso* p;
   CelIdoso* t;
 
@@ -259,6 +236,10 @@ void destroiListIdoso(ListIdoso* lista){
 }
 
 void imprimeListIdoso(ListIdoso* lista){
+  if(lista == NULL){  //se não existir, retorna nada
+    return NULL;
+  }
+
   CelIdoso* p;
   int i = 1;
   for (p = lista->prim; p != NULL; p = p->prox, i++){
@@ -270,10 +251,9 @@ void imprimeListIdoso(ListIdoso* lista){
 
 void imprimeListAmigos(ListAmigos *listAmigos){
 
-	if (listAmigos == NULL)
-	{
-		return;
-	}
+  if (listAmigos == NULL){  //se não existir, retorna nada
+    return NULL;
+  }
 
   CelIdoso* p;
   int i = 1;
