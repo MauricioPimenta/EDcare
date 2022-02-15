@@ -20,20 +20,33 @@ struct listCuidador
     CelCuidador *ult;
 };
 
-//  Funcao que inicializa a lista de cuidadores
-//  inputs: nenhum
-//  output: ponteiro para a estrutura ListCuidador
-//  pre-condicao: nenhuma
-//  pos-condicao: ponteiro de retorno existe e esta alocado
-ListCuidador* inicializaListaCuidador(){
-  ListCuidador* lista = (ListCuidador*)malloc(sizeof(ListCuidador));
 
-  lista->prim = NULL;
-  lista->ult = NULL;
+/***********************************************************
+ *
+ * FUNCOES GET - RETORNAM UM ATRIBUTO DA LISTA DE CUIDADORES
+ * 
+ ***********************************************************/
 
-  return lista;
+Cuidador* retornaCuidadorDaCelula(CelCuidador* p){
+  return p->cuidador;
 }
 
+CelCuidador *retornaProximoCuidador(CelCuidador *p){
+  return p->prox;
+}
+
+CelCuidador *retornaPrimeiroCuidador(ListCuidador *lista){
+  return lista->prim;
+}
+
+
+
+
+/***********************************************************
+ *
+ * FUNCOES SET - INSEREM UM ATRIBUTO DA LISTA DE CUIDADORES
+ * 
+ ***********************************************************/
 //  Funcao que preenche a lista de cuidadores
 //  inputs: string com o nome do arquivo com os nomes dos cuidadores
 //  output: nenhum
@@ -41,8 +54,7 @@ ListCuidador* inicializaListaCuidador(){
 //  pos-condicao: lista de cuidadores criada
 
 // so coloquei os cuidadores em si, sem relacoes com nada
-ListCuidador *preencheListCuidador(char* arquivo)
-{
+ListCuidador *setListCuidador(char* arquivo){
   ListCuidador *lista = inicializaListaCuidador();
 
   //CelCuidador* p = lista->prim;
@@ -77,19 +89,8 @@ ListCuidador *preencheListCuidador(char* arquivo)
   return lista;
 }
 
-Cuidador* retornaCuidadorDaCelula(CelCuidador* p){
-  return p->cuidador;
-}
 
-CelCuidador *retornaProximoCuidador(CelCuidador *p){
-  return p->prox;
-}
-
-CelCuidador *retornaPrimeiroCuidador(ListCuidador *lista){
-  return lista->prim;
-}
-
-CelCuidador* insereCuidador (ListCuidador* lista, char* nome){
+CelCuidador* setCuidador (ListCuidador* lista, char* nome){
   CelCuidador* nova = (CelCuidador*)malloc(sizeof(CelCuidador));
   nova->cuidador = criaCuidador(nome);
   nova->prox = NULL;
@@ -110,7 +111,7 @@ CelCuidador* insereCuidador (ListCuidador* lista, char* nome){
   return nova;
 }
 
-void insereNovoCuidador(ListCuidador* lista, Cuidador *cuidador){
+void setNovoCuidador(ListCuidador* lista, Cuidador *cuidador){
     CelCuidador* nova = (CelCuidador*)malloc(sizeof(CelCuidador));
     nova->cuidador = cuidador;
     nova->prox = lista->prim;
@@ -121,6 +122,25 @@ void insereNovoCuidador(ListCuidador* lista, Cuidador *cuidador){
         lista->ult = nova;
     }
 }
+
+
+
+//  Funcao que inicializa a lista de cuidadores
+//  inputs: nenhum
+//  output: ponteiro para a estrutura ListCuidador
+//  pre-condicao: nenhuma
+//  pos-condicao: ponteiro de retorno existe e esta alocado
+ListCuidador* inicializaListaCuidador(){
+  ListCuidador* lista = (ListCuidador*)malloc(sizeof(ListCuidador));
+
+  lista->prim = NULL;
+  lista->ult = NULL;
+
+  return lista;
+}
+
+
+
 
 void retiraCuidadorDaLista(ListCuidador* lista, CelCuidador* cuidador){
   CelCuidador* p = lista->prim;
@@ -158,7 +178,7 @@ void retiraCuidadorDaLista(ListCuidador* lista, CelCuidador* cuidador){
 
 Cuidador* buscaCuidador(ListCuidador* lista, char* nome){
   CelCuidador* p = lista->prim;
-    while (p != NULL && strcmp(getNomeCuidador(p->cuidador), nome)){
+    while (p != NULL && strcmp(retornaNomeCuidador(p->cuidador), nome)){
         p = p->prox;
     }
     if(p != NULL){
@@ -169,7 +189,7 @@ Cuidador* buscaCuidador(ListCuidador* lista, char* nome){
 
 CelCuidador* buscaCuidadorERetornaCelula(ListCuidador* lista, char* nome){
   CelCuidador* p = lista->prim;
-    while (p != NULL && strcmp(getNomeCuidador(p->cuidador), nome)){
+    while (p != NULL && strcmp(retornaNomeCuidador(p->cuidador), nome)){
         p = p->prox;
     }
     if(p != NULL){
