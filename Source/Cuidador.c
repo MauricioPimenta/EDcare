@@ -38,13 +38,16 @@ Cuidador* criaCuidador(char* nome){
 /*****************************************************
  *
  * FUNCOES GET - RETORNAM UM ATRIBUTO DO CUIDADOR
- * 
+ *
  *****************************************************/
 
 /*
  * Retorna o Nome do Cuidador
  */
 char* getNomeCuidador(Cuidador* cuidador){
+  if(cuidador == NULL){  //se nao existe, retorna nada
+    return NULL;
+  }
   return cuidador->nome;
 }
 
@@ -52,6 +55,9 @@ char* getNomeCuidador(Cuidador* cuidador){
  * Retorna a Latitude do Cuidador
  */
 int getLatitudeCuidador(Cuidador* cuidador){
+  if(cuidador == NULL){  //se nao existe, retorna nada
+    return NULL;
+  }
   return cuidador->Latitude;
 }
 
@@ -59,6 +65,9 @@ int getLatitudeCuidador(Cuidador* cuidador){
  * Retorna a Longitude do Cuidador
  */
 int getLongitudeCuidador(Cuidador* cuidador){
+  if(cuidador == NULL){  //se nao existe, retorna nada
+    return NULL;
+  }
   return cuidador->Longitude;
 }
 
@@ -66,13 +75,16 @@ int getLongitudeCuidador(Cuidador* cuidador){
 /*****************************************************
  *
  * FUNCOES SET - MODIFICAM UM ATRIBUTO DO IDOSO
- * 
+ *
  ****************************************************/
 
 /*
  * Modifca a Latitude do Cuidador
  */
 void setLatitudeCuidador(Cuidador* c, float lat){
+    if(cuidador == NULL){  //se nao existe, retorna nada
+        return NULL;
+    }
 	c->Latitude = lat;
 }
 
@@ -80,6 +92,9 @@ void setLatitudeCuidador(Cuidador* c, float lat){
  * Modifca a Longitude do Cuidador
  */
 void setLongitudeCuidador(Cuidador* c, float l){
+    if(cuidador == NULL){  //se nao existe, retorna nada
+        return NULL;
+    }
 	c->Longitude = l;
 }
 
@@ -92,6 +107,9 @@ void setLongitudeCuidador(Cuidador* c, float l){
 //  pre-condicao: Cuidador existe
 //  pos-condicao: toda a memoria alocada para cuidador foi liberada
 void destroiCuidador(Cuidador* cuidador){
+  if(cuidador == NULL){  //se nao existe, retorna nada
+    return NULL;
+  }
   free(cuidador->nome);
   free(cuidador);
 }
@@ -103,6 +121,9 @@ void destroiCuidador(Cuidador* cuidador){
 //  pre-condicao: cuidador existe
 //  pos-condicao: cuidador nao e alterado
 void imprimeCuidador(Cuidador* cuidador){
+  if(cuidador == NULL){  //se nao existe, retorna nada
+    return NULL;
+  }
   printf("\nNome: %s\n", cuidador->nome);
   printf("Posicao: %0.2f,%0.2f\n\n", cuidador->Latitude, cuidador->Longitude);
 
