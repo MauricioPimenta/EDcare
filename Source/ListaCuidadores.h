@@ -2,7 +2,6 @@
 #define LISTACUIDADORES_H_
 
 #include "Cuidador.h"
-#include "ListaIdoso.h"
 
 typedef struct celCuidador CelCuidador;
 typedef struct listCuidador ListCuidador;

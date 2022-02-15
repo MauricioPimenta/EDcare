@@ -3,8 +3,6 @@
 
 typedef struct idoso Idoso;
 
-//#include "ListaAmigos.h"
-#include "Cuidador.h"
 #include "ListaCuidadores.h"
 #include "ListaIdoso.h"
 
@@ -73,7 +71,15 @@ int getNumFebresBaixas(Idoso* idoso);
  * 
  */
 
+void setLatitudeIdoso(Idoso *idoso, float lat);
 
+void setLongitudeIdoso(Idoso *idoso, float longit);
+
+void setTemperaturaIdoso(Idoso* idoso, float temp);
+
+void setQuedaIdoso(Idoso* idoso, int queda);
+
+void setNumFebresBaixas(Idoso* idoso, int febres);
 
 
 

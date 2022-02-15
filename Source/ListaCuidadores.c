@@ -158,7 +158,7 @@ void retiraCuidadorDaLista(ListCuidador* lista, CelCuidador* cuidador){
 
 Cuidador* buscaCuidador(ListCuidador* lista, char* nome){
   CelCuidador* p = lista->prim;
-    while (p != NULL && strcmp(retornaNomeCuidador(p->cuidador), nome)){
+    while (p != NULL && strcmp(getNomeCuidador(p->cuidador), nome)){
         p = p->prox;
     }
     if(p != NULL){
@@ -169,7 +169,7 @@ Cuidador* buscaCuidador(ListCuidador* lista, char* nome){
 
 CelCuidador* buscaCuidadorERetornaCelula(ListCuidador* lista, char* nome){
   CelCuidador* p = lista->prim;
-    while (p != NULL && strcmp(retornaNomeCuidador(p->cuidador), nome)){
+    while (p != NULL && strcmp(getNomeCuidador(p->cuidador), nome)){
         p = p->prox;
     }
     if(p != NULL){
