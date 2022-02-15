@@ -1,10 +1,18 @@
+/*
+ * INCLUSAO DE BIBLIOTECAS
+ */
+
+// BIBLIOTECAS PADRÃO
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+// BIBLIOTECAS DO USUÁRIO
 #include "Cuidador.h"
 
-
+/*
+ * Definição da Estrutura do TAD Cuidador
+ */
 struct cuidador{
   char *nome;
   float Latitude;
@@ -24,6 +32,14 @@ Cuidador* criaCuidador(char* nome){
 
   return cuidador;
 }
+
+
+
+/*****************************************************
+ *
+ * FUNCOES GET - RETORNAM UM ATRIBUTO DO CUIDADOR
+ * 
+ *****************************************************/
 
 /*
  * Retorna o Nome do Cuidador
@@ -46,6 +62,13 @@ int getLongitudeCuidador(Cuidador* cuidador){
   return cuidador->Longitude;
 }
 
+
+/*****************************************************
+ *
+ * FUNCOES SET - MODIFICAM UM ATRIBUTO DO IDOSO
+ * 
+ ****************************************************/
+
 /*
  * Modifca a Latitude do Cuidador
  */
@@ -59,6 +82,8 @@ void setLatitudeCuidador(Cuidador* c, float lat){
 void setLongitudeCuidador(Cuidador* c, float l){
 	c->Longitude = l;
 }
+
+
 
 
 //  Funcao que libera memoria alocada para o cuidador
