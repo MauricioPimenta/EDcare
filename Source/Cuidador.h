@@ -45,6 +45,7 @@ int getLatitudeCuidador(Cuidador* cuidador);
 int getLongitudeCuidador(Cuidador* cuidador);
 
 
+
 /*****************************************************
  *
  * FUNCOES SET - MODIFICAM UM ATRIBUTO DO CUIDADOR
@@ -63,7 +64,11 @@ void setLongitudeCuidador(Cuidador* c, float l);
 
 
 
-
+/*****************************************************************************
+ * 
+ * OUTRAS FUNÇÕES
+ * 
+ *****************************************************************************/
 //  Imprime cuidador
 //  inputs: ponteiro para cuidador
 //  output: nenhum
