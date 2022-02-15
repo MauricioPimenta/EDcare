@@ -266,7 +266,7 @@ void setTemperaturaIdoso(Idoso* idoso, float temp){
 void setQuedaIdoso(Idoso* idoso, bool queda){
 
 	if (idoso != NULL)
-	idoso->queda = queda;
+		idoso->queda = queda;
 }
 
 //  Define o valor de queda do Idoso
@@ -281,7 +281,7 @@ void setQuedaIdoso(Idoso* idoso, bool queda){
 void setNumFebresBaixas(Idoso* idoso, int febres){
 
 	if (idoso != NULL && febres >= 0)
-	idoso->numFebresBaixas = febres;
+		idoso->numFebresBaixas = febres;
 }
 
 /*  Incrementa o valor de queda do Idoso
@@ -328,10 +328,12 @@ int destroiIdoso(Idoso *idoso){
 //
 void imprimeIdoso(Idoso* idoso){
 
+	if (idoso != NULL){
 	printf("Nome: %s\n", idoso->nome);
 	imprimeListCuidador(idoso->cuidadores);
 	imprimeListAmigos(idoso->amigos);
 	printf("%f, %f, %f, %d", idoso->temperatura, idoso->latitude, idoso->longitude, idoso->queda);
+	}
 }
 
 
