@@ -1,9 +1,18 @@
+/*
+ * INCLUSAO DE BIBLIOTECAS
+ */
+
+// BIBLIOTECAS PADRÃO
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+// BIBLIOTECAS DO USUÁRIO
 #include "Cuidador.h"
 
+/*
+ * Definição da Estrutura do TAD Cuidador
+ */
 struct cuidador{
   char *nome;
   float Latitude;
@@ -23,6 +32,14 @@ Cuidador* criaCuidador(char* nome){
 
   return cuidador;
 }
+
+
+
+/*****************************************************
+ *
+ * FUNCOES GET - RETORNAM UM ATRIBUTO DO CUIDADOR
+ * 
+ *****************************************************/
 
 /*
  * Retorna o Nome do Cuidador
@@ -45,6 +62,13 @@ int getLongitudeCuidador(Cuidador* cuidador){
   return cuidador->Longitude;
 }
 
+
+/*****************************************************
+ *
+ * FUNCOES SET - MODIFICAM UM ATRIBUTO DO IDOSO
+ * 
+ ****************************************************/
+
 /*
  * Modifca a Latitude do Cuidador
  */
@@ -59,11 +83,25 @@ void setLongitudeCuidador(Cuidador* c, float l){
 	c->Longitude = l;
 }
 
+
+
+
+//  Funcao que libera memoria alocada para o cuidador
+//  inputs: ponteiro para a estrutura cuidador
+//  output: nenhum
+//  pre-condicao: Cuidador existe
+//  pos-condicao: toda a memoria alocada para cuidador foi liberada
 void destroiCuidador(Cuidador* cuidador){
   free(cuidador->nome);
   free(cuidador);
 }
 
+
+//  Imprime cuidador
+//  inputs: ponteiro para cuidador
+//  output: nenhum
+//  pre-condicao: cuidador existe
+//  pos-condicao: cuidador nao e alterado
 void imprimeCuidador(Cuidador* cuidador){
   printf("\nNome: %s\n", cuidador->nome);
   printf("Posicao: %0.2f,%0.2f\n\n", cuidador->Latitude, cuidador->Longitude);
