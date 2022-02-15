@@ -202,7 +202,7 @@ int getNumFebresBaixas(Idoso* idoso){
  *
  * FUNCOES SET - MODIFICAM UM ATRIBUTO DO IDOSO
  * 
- */
+ ****************************************************/
 
 //  Modifica a Latitude do Idoso
 //  inputs: 
