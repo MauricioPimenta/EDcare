@@ -51,7 +51,7 @@ Idoso* criaIdoso(char *nome){
 
 	// Cria as listas de amigos e Cuidadores
 	idoso->amigos = CriaListAmigos();
-	idoso->cuidadores = inicializaListaCuidador();
+	idoso->cuidadores = novaListaCuidador();
 
 	// Inicializa os atributos do Idoso com valores padrão (zero)
 	idoso->latitude = LAT_INIT;

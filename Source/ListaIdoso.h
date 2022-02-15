@@ -56,21 +56,21 @@ Idoso *getIdosoCelula(CelIdoso* p);
 //  output: nenhum
 //  pre-condicao: lista de idosos existe e idosos existem
 //  pos-condicao: lista de idosos não é modificada e as listas de amigos de cada idoso sao modificadas
-void setAmizade(ListIdoso *listIdoso, char* amigo1, char* amigo2);
+void novaAmizade(ListIdoso *listIdoso, char* amigo1, char* amigo2);
 
 //  Insere o idoso no final da lista de amigos
 //  inputs: ponteiro para ListAmigos e para idoso
 //  output: nenhum
 //  pre-condicao: lista de amigos existe e usuario existe
 //  pos-condicao: lista de amigos continua existindo, agora com um novo idoso
-void setAmigoNaLista(ListAmigos *lista, Idoso *amigo);
+void insereAmigoNaLista(ListAmigos *lista, Idoso *amigo);
 
 //  Função que insere um idoso no final de uma lista
 //  inputs: ponteiro para a estrutura ListIdoso e o ponteiro para o idoso
 //  output: nenhum
 //  pre-condicao: lista de idoso e idoso existem
 //  pos-condicao: lista continua existindo, agora com idoso inseridos
-void setIdoso(ListIdoso* lista, Idoso *usuario);
+void insereIdoso(ListIdoso* lista, Idoso *usuario);
 
 
 

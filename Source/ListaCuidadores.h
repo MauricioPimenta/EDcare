@@ -11,7 +11,7 @@ typedef struct listCuidador ListCuidador;
 //  output: ponteiro para a estrutura ListCuidador
 //  pre-condicao: nenhuma
 //  pos-condicao: ponteiro de retorno existe e esta alocado
-ListCuidador* inicializaListaCuidador(void);
+ListCuidador* novaListaCuidador(void);
 
 //  Libera memoria alocada para a lista de cuidadores
 //  inputs: ponteiro para a estrutura ListCuidador

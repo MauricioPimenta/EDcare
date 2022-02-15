@@ -34,7 +34,7 @@ struct listCuidador
 //  output: ponteiro para a estrutura ListCuidador
 //  pre-condicao: nenhuma
 //  pos-condicao: ponteiro de retorno existe e esta alocado
-ListCuidador* inicializaListaCuidador(){
+ListCuidador* novaListaCuidador(){
   ListCuidador* lista = (ListCuidador*)malloc(sizeof(ListCuidador));
 
   lista->prim = NULL;
@@ -92,47 +92,6 @@ CelCuidador *getPrimeiroCuidador(ListCuidador *lista){
  * FUNCOES SET - INSEREM UM ATRIBUTO DA LISTA DE CUIDADORES
  * 
  ***********************************************************/
-//  Funcao que preenche a lista de cuidadores
-//  inputs: string com o nome do arquivo com os nomes dos cuidadores
-//  output: nenhum
-//  pre-condicao: lista de cuidadores cujos nomes sao separados com ";", todos dispostos na primeira linha do arquivo de texto
-//  pos-condicao: lista de cuidadores criada
-
-// so coloquei os cuidadores em si, sem relacoes com nada
-ListCuidador *setListCuidador(char* arquivo){
-	ListCuidador *lista = inicializaListaCuidador();
-
-	//CelCuidador* p = lista->prim;
-
-	// Abre o arquivo para leitura
-
-	FILE *fp = fopen(arquivo, "r");
-	char conteudo[10000];
-
-	if (fp == NULL){
-	printf("Nao foi possivel abrir o arquivo. %s\n", arquivo);
-	return NULL;
-	}
-
-	// Pega informacoes somente da primeira linha
-
-	fscanf(fp, "%[^\n]\n", conteudo);
-
-	char* nome = strtok(conteudo, ";");
-
-	//colocando os cuidadores na lista
-	while( nome != NULL ) {
-		insereNovoCuidador(lista, criaCuidador(nome));
-
-		nome = strtok(NULL, ";");
-	}
-
-	fclose(fp);
-
-	lista->ult->prox = NULL;
-
-	return lista;
-}
 
 
 CelCuidador* insereCuidador (ListCuidador* lista, char* nome){
