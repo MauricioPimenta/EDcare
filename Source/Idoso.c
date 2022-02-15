@@ -317,6 +317,7 @@ int destroiIdoso(Idoso *idoso){
   		free(idoso->amigos);
   		free(idoso);
 	}
+	return 0;
 }
 
 //  Imprime idoso

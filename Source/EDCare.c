@@ -23,6 +23,14 @@
 #include "ListaCuidadores.h"
 #include "ListaIdoso.h"
 
+
+/*
+ * CONSTANTES E DEFINICOES
+ */
+#define FILE_IN_IDOSOS	"../Entradas/apoio.txt"
+#define FILE_IN_CUIDADORES	"../Entradas/cuidadores.txt"
+
+
 /*
  *  CABECALHO DE FUNCOES DO PROGRAMA
 */
@@ -37,18 +45,82 @@ void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
  */
 int main()
 {
-	// SETUP - Le arquivos de entrada e armazena Idosos, cria suas dependências, etc
-	//		 - Inicializa os cuidadores cadastrados e define as dependências entre
+	// SETUP - 	Le arquivos de entrada e armazena Idosos, cria suas dependências, etc
+	//		 - 	Inicializa os cuidadores cadastrados e define as dependências entre
 	//			idosos e cuidadores.
 
     printf("Criando lista de idosos...\n");
-    ListIdoso *listaIdosos = inicializaListIdoso ( "./Entradas/apoio.txt" );
-	imprimeListIdoso(listaIdosos);
+
+	// Cria a lista de Idosos do programa
+	// e a Inicializa.
+	ListIdoso* idososCadastrados = CriaListaIdoso();	
+
+	/*
+	* Lê o arquivo de idosos e insere os idosos na lista
+	*/
+		FILE *fp = fopen(FILE_IN_IDOSOS, "r");	// Abre arquivo de entrada dos idosos
+		char conteudo[10000];
+
+		// Verifica se o arquivo abriu corretamente
+		if (fp == NULL){
+			printf("Nao foi possivel abrir o arquivo. %s.\n", FILE_IN_IDOSOS);
+			
+			// Exit Status -1 = Arquivo de entrada não encontrado
+			return -1;	
+		}
+
+		// Pega informações somente da primeira linha
+		fscanf(fp, "%[^\n]\n", conteudo);
+
+		char* nome = strtok(conteudo, ";");
+
+		while( nome != NULL ) {
+				// Cria o idoso e armazena na lista de idosos do programa
+				Idoso* idoso = criaIdoso(nome);
+				insereIdoso(idososCadastrados, idoso);
+
+				nome = strtok(NULL, ";");
+		}
+
+
+	/*
+	 * Lê o restante do arquivo e armazena as relações de amizades dos idosos
+	 */
+		// Agora trabalhando com as informações(linhas) restantes
+		fscanf(fp, "%[^EOF]", conteudo);
+		char idoso[10000], amigo[10000];
+		
+		
+		nome = strtok(conteudo, "\n");
+		//pegando o primeiro nome da linha
+		while (nome != NULL)
+		{	
+			int i,j;
+			// Pegando o primeiro nome da linha até encontrar o ';'
+			for (i = 0; nome[i] != ';'; i++){ 
+				idoso[i] = nome[i];
+			}
+			// Adiciona '\0' no final para identificar término da string
+			idoso[i] = '\0';
+			i++;
+
+			for (j = 0; nome[i] != '\0'; i++, j++){ //pegando o segundo nome da linha
+				amigo[j] = nome[i];
+			}
+			amigo[j] = '\0';
+
+			insereAmizade(idososCadastrados, idoso, amigo);
+			nome = strtok(NULL, "\n");
+		}
+
+		fclose(fp);
+
+	imprimeListIdoso(idososCadastrados);
 
     printf("Preenchendo listas de cuidadores...\n");
-	ListCuidador *listaCuidadores = preencheListCuidador("./Entradas/cuidadores.txt");
+	//ListCuidador *listaCuidadores = preencheListCuidador("./Entradas/cuidadores.txt");
 
-	imprimeListCuidador(listaCuidadores);
+	//imprimeListCuidador(listaCuidadores);
 
 
 	// RUN  - Le arquivos de entrada de cada um dos Idosos e Cuidadores.
@@ -67,6 +139,10 @@ int main()
 	return 0;
 
 }
+
+ListIdoso* inicializaListIdoso(char* arquivo);
+
+  
 
 void InsereMedidasCuidador(Cuidador* cuidador, int linhaArquivo, char* arquivo){
 

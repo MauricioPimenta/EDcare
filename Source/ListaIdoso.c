@@ -20,75 +20,19 @@ struct listAmigos{
   CelIdoso *ult;
 };
 
-/* ListIdoso* CriaListaIdoso()
+ListIdoso* CriaListaIdoso()
 {
 	ListIdoso* lista = (ListIdoso*)malloc(sizeof(ListIdoso));
 	lista->prim = NULL;
 	lista->ult = NULL;
 	return lista;
-} */
+}
 
 ListAmigos* CriaListAmigos(void){
     ListAmigos* lista = (ListAmigos*)malloc(sizeof(ListAmigos));
     lista->prim = NULL;
     lista->ult = NULL;
     return lista;
-}
-
-
-ListIdoso* inicializaListIdoso(char* arquivo){
-  ListIdoso* lista = (ListIdoso*)malloc(sizeof(ListIdoso));
-  lista->prim = NULL;
-  lista->ult = NULL;
-
-  // Abre o arquivo para leitura
-
-  FILE *fp = fopen(arquivo, "r");
-  char conteudo[10000];
-
-   if (fp == NULL){
-    printf("Nao foi possivel abrir o arquivo. %s.\n", arquivo);
-  }
-
-  // Pega informações somente da primeira linha
-
-  fscanf(fp, "%[^\n]\n", conteudo);
-
-  char* nome = strtok(conteudo, ";");
-
-  while( nome != NULL ) {
-        insereIdoso(lista, criaIdoso(nome));
-
-        nome = strtok(NULL, ";");
-  }
-
-  // Agora trabalhando com as informações(linhas) restantes
-
-  fscanf(fp, "%[^EOF]", conteudo);
-  char aux1[10000], aux2[10000];
-  int i = 0;
-  int j = 0;
-  nome = strtok(conteudo, "\n");
-  //pegando o primeiro nome da linha
-  while (nome != NULL){
-        for (i = 0; nome[i] != ';'; i++){ //pegando o primeiro nome da linha
-            aux1[i] = nome[i];
-        }
-        aux1[i] = '\0';
-        for (i += 1, j = 0; nome[i] != '\0'; i++, j++){ //pegando o segundo nome da linha
-            aux2[j] = nome[i];
-        }
-        aux2[j] = '\0';
-
-        insereAmizade(lista, aux1, aux2);
-        nome = strtok(NULL, "\n");
-  }
-
-  fclose(fp);
-
-  lista->ult->prox = NULL;
-
-  return lista;
 }
 
 

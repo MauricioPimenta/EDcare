@@ -5,8 +5,6 @@
 
 typedef struct idoso Idoso;
 
-
-
 #include "ListaCuidadores.h"
 #include "ListaIdoso.h"
 

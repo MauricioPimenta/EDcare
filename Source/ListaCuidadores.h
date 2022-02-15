@@ -2,7 +2,6 @@
 #define LISTACUIDADORES_H_
 
 #include "Cuidador.h"
-#include "ListaIdoso.h"
 
 typedef struct celCuidador CelCuidador;
 typedef struct listCuidador ListCuidador;
@@ -69,14 +68,14 @@ ListCuidador *setListCuidador(char* arquivo);
 //  output: ponteiro para o cuidador criada
 //  pre-condicao: lista de cuidador existe
 //  pos-condicao: lista de cuidador continua existindo, agora com um novo cuidador
-CelCuidador* setCuidador (ListCuidador* lista, char* nome);
+CelCuidador* insereCuidador (ListCuidador* lista, char* nome);
 
 //  Funcao que insere um cuidador que ja existe no inicio da lista
 //  inputs: ponteiro para a estrutura ListCuidador e o ponteiro para Cuidador
 //  output: nenhum
 //  pre-condicao: lista de cuidadores e cuidador existem
 //  pos-condicao: lista de cuidadores continua existindo, agora com um novo cuidador
-void setNovoCuidador(ListCuidador* lista, Cuidador *cuidador);
+void insereNovoCuidador(ListCuidador* lista, Cuidador *cuidador);
 
 
 

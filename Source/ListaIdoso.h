@@ -7,9 +7,9 @@ typedef struct listAmigos ListAmigos;
 
 #include "Idoso.h"
 #include "Cuidador.h"
-#include "ListaCuidadores.h"
 
-//ListIdoso* CriaListaIdoso(void);
+
+ListIdoso* CriaListaIdoso(void);
 
 ListAmigos* CriaListAmigos(void);
 
