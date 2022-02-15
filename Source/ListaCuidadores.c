@@ -1,11 +1,21 @@
+/*
+ * INCLUSAO DE BIBLIOTECAS
+ */
+
+// BIBLIOTECAS PADRÃO
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h> //Diretorio
 #include <sys/stat.h> //Diretorio
 
+// BIBLIOTECAS DO USUÁRIO
 #include "ListaCuidadores.h"
 
+
+/*
+ * Definição das Estruturas do TAD ListaCuidadores
+ */
 struct celCuidador
 {
     Cuidador* cuidador;

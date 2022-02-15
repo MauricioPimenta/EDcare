@@ -79,17 +79,17 @@ void insereNovoCuidador(ListCuidador* lista, Cuidador *cuidador);
 
 
 
-
-
-
+/*****************************************************************************
+ * 
+ * OUTRAS FUNÇÕES
+ * 
+ *****************************************************************************/
 //  Funcao que retira cuidador da lista de cuidadores
 //  inputs: ponteiro para a estrutura ListCuidador e o ponteiro para CelCuidador
 //  output: nenhum
 //  pre-condicao: lista de cuidadores existe
 //  pos-condicao: lista de cuidadores continua existindo, agora com cuidador desejado retirado
 void retiraCuidadorDaLista(ListCuidador* lista, CelCuidador* cuidador);
-
-
 
 //  Funaoo que retorna cuidador com o nome especificado
 //  inputs: ponteiro para ListCuidador e ponteiro para char
