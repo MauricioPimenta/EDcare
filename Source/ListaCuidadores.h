@@ -53,7 +53,7 @@ CelCuidador *getPrimeiroCuidador(ListCuidador *lista);
 
 /*****************************************************
  *
- * FUNCOES SET - RETORNAM UM ATRIBUTO DO IDOSO
+ * FUNCOES SET - INSEREM UM ATRIBUTO DO IDOSO
  * 
  */
 
