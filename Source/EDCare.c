@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "edcio.h"
 
 #include "Idoso.h"
 #include "Cuidador.h"
@@ -238,6 +239,7 @@ int main()
 
 		// Imprime a lista de cuidadores cadastrados
 		imprimeListCuidador(cuidadoresCadastrados);
+		// Imprime a lista de idosos novamente pra mostrar os cuidadores cadastrados
 		imprimeListIdoso(idososCadastrados);
 
 
@@ -245,7 +247,11 @@ int main()
 	//		- Le a linha 'n' de cada arquivo por vez e depois realiza as operações
 	//		  necessárias
 
+	// Ir na lista de idosos e ler uma linha do arquivo de cada idoso, modificando as
+	// informações atuais de cada idoso
+	// 
 
+		
 
 
 
