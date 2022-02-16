@@ -30,6 +30,8 @@ float calculaDistancia(float lat1, float long1, float lat2, float long2);
 
 int ContadorDeLinhasArquivo(char* arquivo);
 
+void funcaoEDCare(ListIdoso* listaIdoso, ListCuidador* listaCuidador);
+
 /*
  * FUNÇÃO PRINCIPAL DO PROGRAMA
  */
@@ -40,6 +42,7 @@ int main(){
         return resultado;
     }
 	
+//=======================================================================================================
 	int ContadorDeLinhasArquivo(char* arquivo){
         FILE* fp = fopen(arquivo, "r");
         char conteudo[10000];
@@ -58,5 +61,33 @@ int main(){
         return cont;
     }
 
+//=======================================================================================================
+	
+	void funcaoEDCare(ListIdoso* listaIdoso, ListCuidador* listaCuidador){
+
+        int numLinhas;
+
+        //a linha abaixo conta quantas linhas os arquivos tem, pegando como referencia um arquivo de cuidador, visto que todos tem o mesmo tamanho
+        char* nomeCuid = strdup(retornaNomeCuidador(retornaCuidadorDaCelula(retornaPrimeiroCuidador(listaCuidador))));
+        numLinhas = ContadorDeLinhasArquivo(strcat(nomeCuid, ".txt"));
+        printf("%i linhas\n\n", numLinhas);
+
+        free(nomeCuid);  //liberando a memoria do char* duplicado
+
+        int linha;
+        for(linha = 1; linha <= numLinhas; linha++){
+            //fazer as operacoes principais dentro deste for(), pois nele o acesso aos dados fica automatizado por linhas
+
+            insereLinhaDeMedidaIdoso(listaIdoso, linha);
+            insereLinhaDeMedidaCuidador(listaCuidador, linha);
+
+
+            // FAZER OPERACOES AQUI <----------------------------------------------------------
+        }
+    }
+	
+	
+	
+	
    
 }
