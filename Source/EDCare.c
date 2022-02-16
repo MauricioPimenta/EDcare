@@ -247,7 +247,7 @@ int main()
 	//		- Le a linha 'n' de cada arquivo por vez e depois realiza as operações
 	//		  necessárias
 
-	// Ir na lista de idosos e ler uma linha do arquivo de cada idoso, modificando as
+	// Ir na lista de idosos e ler uma linha do arquivo de cada idoso, modificando a s
 	// informações atuais de cada idoso
 	// 
 
