@@ -87,7 +87,41 @@ int main(){
     }
 	
 	
+//===============================================================================================================================================
+//===============================================================================================================================================
+//FUNCOES DOS TADS LISTAIDOSO E LISTACUIDADOR (usei na função q ta aqui na EDCare.c, a funcao "funcaoEDCare")
 	
-	
+	void insereLinhaDeMedidaIdoso(ListIdoso* lista, int linha){
+    CelIdoso* p;
+    for(p = lista->prim; p != NULL; p = p->prox){
+        Idoso* idoso = retornaIdosoCelula(p);
+        char* nomeIdoso = strdup(retornaNomeIdoso(idoso));
+
+        char* arquivo = strcat(nomeIdoso, ".txt");
+        InsereMedidasIdoso(idoso, linha, arquivo);
+
+        free(nomeIdoso);
+    }
+}
    
+//=========================================================
+	
+	void insereLinhaDeMedidaCuidador(ListCuidador* lista, int linha){
+    CelCuidador* p;
+    for(p = lista->prim; p != NULL; p = p->prox){
+        Cuidador* cuidador = retornaCuidadorDaCelula(p);
+        char* nomeCuidador = strdup(retornaNomeCuidador(cuidador));
+
+        char* arquivo = strcat(nomeCuidador, ".txt");
+        InsereMedidasCuidador(cuidador, linha, arquivo);
+
+        free(nomeCuidador);
+    }
+}
+	
+//========================================================
+
+	
+	
+
 }
