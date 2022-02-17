@@ -1,21 +1,13 @@
-/*
- * INCLUSAO DE BIBLIOTECAS
- */
-
-// BIBLIOTECAS PADRÃO
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h> //Diretorio
 #include <sys/stat.h> //Diretorio
 
-// BIBLIOTECAS DO USUÁRIO
+
 #include "ListaCuidadores.h"
 
 
-/*
- * Definição das Estruturas do TAD ListaCuidadores
- */
 struct celCuidador
 {
     Cuidador* cuidador;
@@ -28,13 +20,27 @@ struct listCuidador
     CelCuidador *ult;
 };
 
+struct idoso{
+  char *nome;
+  ListAmigos *amigos;
+  ListCuidador *cuidadores;
+  float latitude;
+  float longitude;
+  float temperatura;
+  int queda;
+  int numFebresBaixas;
+  //char *strFileIn;
+  //char *strFileOut;
+  //FILE *fileIn;
+  //FILE *fileOut;
+};
 
 //  Funcao que inicializa a lista de cuidadores
 //  inputs: nenhum
 //  output: ponteiro para a estrutura ListCuidador
 //  pre-condicao: nenhuma
 //  pos-condicao: ponteiro de retorno existe e esta alocado
-ListCuidador* novaListaCuidador(){
+ListCuidador* inicializaListaCuidador(){
   ListCuidador* lista = (ListCuidador*)malloc(sizeof(ListCuidador));
 
   lista->prim = NULL;
@@ -43,74 +49,70 @@ ListCuidador* novaListaCuidador(){
   return lista;
 }
 
-//  Libera memoria alocada para a lista de cuidadores
-//  inputs: ponteiro para a estrutura ListCuidador
+//  Funcao que preenche a lista de cuidadores
+//  inputs: string com o nome do arquivo com os nomes dos cuidadores
 //  output: nenhum
-//  pre-condicao: ListCuidador precisa existir
-//  pos-condicao: toda a memoria alocada para ListCuidador foi liberada
-void destroiListCuidador(ListCuidador *lista){
-  if(lista == NULL){  //se nao existe, retorna nada
-    return NULL;
+//  pre-condicao: lista de cuidadores cujos nomes sao separados com ";", todos dispostos na primeira linha do arquivo de texto
+//  pos-condicao: lista de cuidadores criada
+
+// so coloquei os cuidadores em si, sem relacoes com nada
+ListCuidador *preencheListCuidador(char* arquivo){
+  ListCuidador *lista = inicializaListaCuidador();
+
+  //CelCuidador* p = lista->prim;
+
+  // Abre o arquivo para leitura
+
+  FILE *fp = fopen(arquivo, "r");
+  char conteudo[10000];
+
+   if (fp == NULL)
+    printf("Nao foi possivel abrir o arquivo. %s\n", arquivo);
+
+  // Pega informacoes somente da primeira linha
+
+  fscanf(fp, "%[^\n]\n", conteudo);
+
+  char* nome = strtok(conteudo, ";");
+
+  //colocando os cuidadores na lista
+  while( nome != NULL ) {
+        insereNovoCuidador(lista, criaCuidador(nome));
+
+        nome = strtok(NULL, ";");
   }
-  CelCuidador* p;
-  CelCuidador* t;
 
-  p = lista->prim;
-  while(p != NULL){
-        t = p->prox;
-        destroiCuidador(p->cuidador);
-        free(p);
-        p = t;
-    }
+  fclose(fp);
 
-  free(lista);
+  lista->ult->prox = NULL;
+
+  return lista;
 }
 
+CelCuidador* CriaCelulaCuidador(Cuidador* cuidador){
+    CelCuidador* nova = (CelCuidador*)malloc(sizeof(CelCuidador));
+    nova->cuidador = cuidador;
+    nova->prox = NULL;
+    return nova;
+}
 
-
-
-/***********************************************************
- *
- * FUNCOES GET - RETORNAM UM ATRIBUTO DA LISTA DE CUIDADORES
- *
- ***********************************************************/
-
-Cuidador* getCuidadorDaCelula(CelCuidador* p){
-  if(p == NULL){  //se nao existe, retorna nada
-    return NULL;
-  }
+Cuidador* retornaCuidadorDaCelula(CelCuidador* p){
   return p->cuidador;
 }
 
-CelCuidador *getProximoCuidador(CelCuidador *p){
-  if(p == NULL){  //se nao existe, retorna nada
-    return NULL;
-  }
+CelCuidador *retornaProximoCuidador(CelCuidador *p){
   return p->prox;
 }
 
-CelCuidador *getPrimeiroCuidador(ListCuidador *lista){
-  if(lista == NULL){  //se nao existe, retorna nada
-    return NULL;
-  }
+CelCuidador *retornaPrimeiroCuidador(ListCuidador *lista){
   return lista->prim;
 }
 
-
-
-
-/***********************************************************
- *
- * FUNCOES SET - INSEREM UM ATRIBUTO DA LISTA DE CUIDADORES
- *
- ***********************************************************/
-
+CelCuidador* retornaUltimoCuidador(ListCuidador* lista){
+    return lista->ult;
+}
 
 CelCuidador* insereCuidador (ListCuidador* lista, char* nome){
-  if(lista == NULL || nome == NULL){  //se nao existe, retorna nada
-    return NULL;
-  }
-
   CelCuidador* nova = (CelCuidador*)malloc(sizeof(CelCuidador));
   nova->cuidador = criaCuidador(nome);
   nova->prox = NULL;
@@ -132,28 +134,26 @@ CelCuidador* insereCuidador (ListCuidador* lista, char* nome){
 }
 
 void insereNovoCuidador(ListCuidador* lista, Cuidador *cuidador){
-    if(lista == NULL || cuidador == NULL){  //se nao existe, retorna nada
-        return NULL;
-    }
-
     CelCuidador* nova = (CelCuidador*)malloc(sizeof(CelCuidador));
     nova->cuidador = cuidador;
-    nova->prox = lista->prim;
+    nova->prox = NULL;
 
-    lista->prim = nova;
+    if(lista->prim == NULL){
+      lista->prim = nova;
+      lista->ult = nova;
+    }
+    else{
+      CelCuidador *p = lista->prim;
 
-    if(lista->ult == NULL){
-        lista->ult = nova;
+      while(p->prox != NULL){
+        p = p->prox;
+      }
+      p->prox = nova;
+      lista->ult = nova;
     }
 }
 
-
-
 void retiraCuidadorDaLista(ListCuidador* lista, CelCuidador* cuidador){
-  if(lista == NULL || cuidador == NULL){  //se nao existe, retorna nada
-    return NULL;
-  }
-
   CelCuidador* p = lista->prim;
   CelCuidador* anterior = NULL;
 
@@ -188,27 +188,16 @@ void retiraCuidadorDaLista(ListCuidador* lista, CelCuidador* cuidador){
 }
 
 Cuidador* buscaCuidador(ListCuidador* lista, char* nome){
-  if(lista == NULL || nome == NULL){  //se nao existe, retorna nada
-    return NULL;
-  }
-
   CelCuidador* p = lista->prim;
-    while (p != NULL && strcmp(getNomeCuidador(p->cuidador), nome)){
+    while (p != NULL && strcmp(retornaNomeCuidador(p->cuidador), nome)){
         p = p->prox;
     }
-    if(p != NULL){
-      return p->cuidador;
-    }
-    return NULL;
+    return p->cuidador;
 }
 
 CelCuidador* buscaCuidadorERetornaCelula(ListCuidador* lista, char* nome){
-  if(lista == NULL || nome == NULL){  //se nao existe, retorna nada
-    return NULL;
-  }
-
   CelCuidador* p = lista->prim;
-    while (p != NULL && strcmp(getNomeCuidador(p->cuidador), nome)){
+    while (p != NULL && strcmp(retornaNomeCuidador(p->cuidador), nome)){
         p = p->prox;
     }
     if(p != NULL){
@@ -218,16 +207,89 @@ CelCuidador* buscaCuidadorERetornaCelula(ListCuidador* lista, char* nome){
 }
 
 
-void imprimeListCuidador(ListCuidador* lista){
-  if(lista == NULL){  //se nao existe, retorna nada
-    return NULL;
-  }
 
+void destroiListCuidador(ListCuidador *lista){
+  CelCuidador* p;
+  CelCuidador* t;
+
+  p = lista->prim;
+  while(p != NULL){
+        t = p->prox;
+        destroiCuidador(p->cuidador);
+        free(p);
+        p = t;
+    }
+
+  free(lista);
+}
+
+void imprimeListCuidador(ListCuidador* lista){
   CelCuidador* p;
   int i = 1;
-  printf("LISTA DE CUIDADORES:\n");
+  printf("----------LISTA DE CUIDADORES:----------\n");
   for (p = lista->prim; p != NULL; p = p->prox, i++){
-    printf("Cuidador %d\n", i);
+    printf("Cuidador %d", i);
     imprimeCuidador(p->cuidador);
   }
 }
+
+
+
+
+
+void insereLinhaDeMedidaCuidador(ListCuidador* lista, int linha){
+    CelCuidador* p;
+    for(p = lista->prim; p != NULL; p = p->prox){
+        Cuidador* cuidador = retornaCuidadorDaCelula(p);
+        char* nomeCuidador = strdup(retornaNomeCuidador(cuidador));
+
+        char* arquivo = strcat(nomeCuidador, ".txt");
+        InsereMedidasCuidador(cuidador, linha, arquivo);
+
+        free(nomeCuidador);
+    }
+}
+
+
+Cuidador* RetornaCuidadorMaisPerto(Idoso* idoso, ListCuidador* listacuidador){
+    float latIdoso = retornaLatitudeIdoso(idoso);
+    float longiIdoso = retornaLongitudeIdoso(idoso);
+
+    float latCuidador, longiCuidador;
+    float distancia, menor;
+
+    CelCuidador* p;
+    for(p = listacuidador->prim; p != NULL; p = p->prox){
+        latCuidador = retornaLatitudeCuidador(p->cuidador);
+        longiCuidador = retornaLongitudeCuidador(p->cuidador);
+
+        distancia = calculaDistancia(latIdoso, longiIdoso, latCuidador, longiCuidador);
+        if(p == listacuidador->prim){  //só para inicializar o valor da distancia com base no primeiro cuidador
+            menor = distancia;
+        }
+        if(distancia < menor){
+            menor = distancia;
+        }
+    }
+
+    for(p = listacuidador->prim; p != NULL; p = p->prox){ //for para "capturar" o cuidador cuja distancia do idoso é a menor
+        latCuidador = retornaLatitudeCuidador(p->cuidador);
+        longiCuidador = retornaLongitudeCuidador(p->cuidador);
+
+        distancia = calculaDistancia(latIdoso, longiIdoso, latCuidador, longiCuidador);
+        if(distancia == menor){
+            Cuidador* cuidadorPerto = retornaCuidadorDaCelula(p);
+            return cuidadorPerto;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
