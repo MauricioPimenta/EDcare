@@ -1,13 +1,18 @@
 #ifndef IDOSO_H_
 #define IDOSO_H_
 
-typedef struct idoso Idoso;
+//typedef struct celCuidador CelCuidador;
+//typedef struct listCuidador ListCuidador;
 
-//#include "ListaAmigos.h"
-#include "Cuidador.h"
+
 #include "ListaCuidadores.h"
 #include "ListaIdoso.h"
 
+typedef struct idoso Idoso;
+
+typedef struct listCuidador ListCuidador;
+typedef struct listAmigos ListAmigos;
+typedef struct listIdoso ListIdoso;
 
 //  Cria estrutura idoso
 //  inputs: nome do idoso
@@ -17,72 +22,6 @@ typedef struct idoso Idoso;
 
 Idoso *criaIdoso(char *nome);
 
-
-/*****************************************************
- *
- * FUNCOES GET - RETORNAM UM ATRIBUTO DO IDOSO
- * 
- */
-
-//  Retorna o nome do idoso
-//  inputs: ponteiro para a estrutura Idoso
-//  output: nome do idoso
-//  pre-condicao: idoso existe
-//  pos-condicao: idoso nao é modificado e nome do idoso disponível
-
-char *getNomeIdoso(Idoso *idoso);
-
-
-//  Retorna Lista de amigos do idoso
-//  inputs: ponteiro para estrutura Idoso
-//  output: ponteiro para estrutura ListAmigos
-//  pre-condicao: idoso precisa existir
-//  pos-condicao: idoso nao é alterado e lista de amigos disponível
-ListAmigos *getListAmigosIdoso(Idoso *idoso);
-
-
-//  Retona a lista de cuidadores do idoso
-//  inputs: ponteiro para a estrutura Idoso
-//  output: ponteiro para a estrutura ListCuidadores
-//  pre-condicao: idoso precisa existir
-//  pos-condicao: idoso nao é modificado e estrutura dos cuidadores disponível
-
-ListCuidador *getListCuidadores(Idoso *idoso);
-
-
-
-float getLatitudeIdoso(Idoso *idoso);
-
-float getLongitudeIdoso(Idoso *idoso);
-
-float getTemperaturaIdoso(Idoso* idoso);
-
-int getQuedaIdoso(Idoso* idoso);
-
-int getNumFebresBaixas(Idoso* idoso);
-
-
-/******************************************************************************/
-
-
-
-
-/*****************************************************
- *
- * FUNCOES SET - MODIFICAM UM ATRIBUTO DO IDOSO
- * 
- */
-
-
-
-
-
-
-
-
-
-
-
 //  Libera memória alocada para o idoso
 //  inputs: ponteiro para a estrutura Idoso
 //  output: nenhum
@@ -91,6 +30,50 @@ int getNumFebresBaixas(Idoso* idoso);
 //
 void destroiIdoso(Idoso *idoso);
 
+//  Retona a lista de cuidadores do idoso
+//  inputs: ponteiro para a estrutura Idoso
+//  output: ponteiro para a estrutura ListCuidadores
+//  pre-condicao: idoso precisa existir
+//  pos-condicao: idoso nao é modificado e estrutura dos cuidadores disponível
+ListCuidador *retornaListCuidadores(Idoso *idoso);
+
+//  Retorna o nome do idoso
+//  inputs: ponteiro para a estrutura Idoso
+//  output: nome do idoso
+//  pre-condicao: idoso existe
+//  pos-condicao: idoso nao é modificado e nome do idoso disponível
+
+char *retornaNomeIdoso(Idoso *idoso);
+
+void increaseNumFebresBaixas(Idoso* idoso);
+
+float retornaTemperatura(Idoso* idoso);
+
+int retornaNumFebresBaixas(Idoso* idoso);
+
+int retornaQueda(Idoso* idoso);
+
+float retornaLatitudeIdoso(Idoso* idoso);
+
+float retornaLongitudeIdoso(Idoso* idoso);
+
+void setNumFebresBaixas(Idoso* idoso, int febres);
+
+
+//  Retorna Lista de amigos do idoso
+//  inputs: ponteiro para estrutura Idoso
+//  output: ponteiro para estrutura ListAmigos
+//  pre-condicao: idoso precisa existir
+//  pos-condicao: idoso nao é alterado e lista de amigos disponível
+
+ListAmigos *retornaListAmigosIdoso(Idoso *idoso);
+
+void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
+
+void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* listaCuidador);
+
+
+int ContadorDeTokensLinha(char* linha);
 
 
 //  Imprime idoso
@@ -100,18 +83,7 @@ void destroiIdoso(Idoso *idoso);
 //  pos-condicao: Usuario nao eh alterado
 void imprimeIdoso(Idoso* usuario);
 
-
-// Outras funcoes
-
-void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* listaCuidador);
-
-void InsereCuidadorNoIdoso(Idoso* idoso, Cuidador* cuidador);
-
-void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
-
-
-
-
+float calculaDistancia(float lat1, float long1, float lat2, float long2);
 
 
 
