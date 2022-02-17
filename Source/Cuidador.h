@@ -17,58 +17,30 @@ Cuidador* criaCuidador(char* nome);
 //  pos-condicao: toda a memoria alocada para cuidador foi liberada
 void destroiCuidador(Cuidador* cuidador);
 
-
-/*****************************************************
- *
- * FUNCOES GET - RETORNAM UM ATRIBUTO DO CUIDADOR
- * 
- *****************************************************/
 //  Funcao que retorna o nome do cuidador
 //  inputs: ponteiro para a estrutura cuidador
 //  output: String - ponteiro para char
 //  pre-condicao: cuidador existe
 //  pos-condicao: cuidador nao e modificado
-char* getNomeCuidador(Cuidador* cuidador);
+char* retornaNomeCuidador(Cuidador* cuidador);
 
 //  Funcao que retorna a latitude do cuidador
 //  inputs: ponteiro para a estrutura cuidador
 //  output: inteiro com dados da latitude
 //  pre-condicao: cuidador existe
 //  pos-condicao: cuidador nao e modificado
-int getLatitudeCuidador(Cuidador* cuidador);
+float retornaLatitudeCuidador(Cuidador* cuidador);
 
 //  Funcao que retorna a longitude do cuidador
 //  inputs: ponteiro para a estrutura cuidador
 //  output: inteiro com dados da longitude
 //  pre-condicao: cuidador existe
 //  pos-condicao: cuidador nao e modificado
-int getLongitudeCuidador(Cuidador* cuidador);
+float retornaLongitudeCuidador(Cuidador* cuidador);
+
+void InsereMedidasCuidador(Cuidador* cuidador, int linhaArquivo, char* arquivo);
 
 
-
-/*****************************************************
- *
- * FUNCOES SET - MODIFICAM UM ATRIBUTO DO CUIDADOR
- * 
- *****************************************************/
-
-/*
- * Modifca a Latitude do Cuidador
- */
-void setLatitudeCuidador(Cuidador* c, float lat);
-
-/*
- * Modifca a Longitude do Cuidador
- */
-void setLongitudeCuidador(Cuidador* c, float l);
-
-
-
-/*****************************************************************************
- * 
- * OUTRAS FUNÇÕES
- * 
- *****************************************************************************/
 //  Imprime cuidador
 //  inputs: ponteiro para cuidador
 //  output: nenhum
