@@ -32,8 +32,6 @@ int ContadorDeLinhasArquivo(char* arquivo);
 
 void funcaoEDCare(ListIdoso* listaIdoso, ListCuidador* listaCuidador);
 
-void verificaIdoso(ListIdoso* listaidoso, ListCuidador* listacuidador);
-
 /*
  * FUNÇÃO PRINCIPAL DO PROGRAMA
  */
