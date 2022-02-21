@@ -15,6 +15,7 @@
 				"Source/ListaIdoso.h",
 				"Source/ListaCuidadores.c",
 				"Source/ListaCuidadores.h",
+                "-lm",
 				"-Wall",
 				//"-Werror",
                 "-fdiagnostics-color=always",

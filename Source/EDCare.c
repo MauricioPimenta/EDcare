@@ -6,7 +6,7 @@
  * 
  * 
  * 
- * Autores: Maurício Bittencourt Pimenta e Douglas Stein
+ * Autores: Maurício Bittencourt Pimenta e Douglas Stein Sabino
  * Data: 02/2022
  ---------------------------------------------------------------------------------------------*/
 
@@ -28,17 +28,15 @@
 /*
  * CONSTANTES E DEFINICOES
  */
-#define FILE_IN_IDOSOS	"./Entradas/apoio.txt"
-#define FILE_IN_CUIDADORES	"./Entradas/cuidadores.txt"
+#define FILE_IN_IDOSOS	"apoio.txt"
+#define FILE_IN_CUIDADORES	"cuidadores.txt"
 
 
 /*
  *  CABECALHO DE FUNCOES DO PROGRAMA
 */
-void InsereMedidasCuidador(Cuidador* cuidador, int linhaArquivo, char* arquivo);
-void LeLinhaCuidadorNoIdoso(char* arquivo, ListIdoso* listaIdoso, ListCuidador* listaCuidador);
-void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
-
+int ContadorDeLinhasArquivo(char* arquivo);
+void funcaoEDCare(ListIdoso* listaIdoso, ListCuidador* listaCuidador);
 
 
 /*
@@ -252,8 +250,10 @@ int main()
 	// 
 
 		
-
-
+	printf("Criando arquivos de saida com as decisoes feitas...\n\n");
+    funcaoEDCare(idososCadastrados, cuidadoresCadastrados);
+	//imprimeListIdoso(idososCadastrados);
+	//imprimeListCuidador(cuidadoresCadastrados);
 
 
 
@@ -271,125 +271,47 @@ int main()
 	return 0;
 }
 
-void InsereMedidasCuidador(Cuidador* cuidador, int linhaArquivo, char* arquivo){
+void funcaoEDCare(ListIdoso* listaIdoso, ListCuidador* listaCuidador){
 
-    // FILE *fp = fopen(arquivo, "r");
+        int numLinhas;
 
-    // if(fp == NULL){
-    //     printf("Erro no arquivo de medidas de %s\n.", retornaNomeCuidador(cuidador));
-    // }
+        //a linha abaixo conta quantas linhas os arquivos tem, pegando como referencia um arquivo de cuidador, visto que todos tem o mesmo tamanho
+        char* nomeCuid = strdup(getNomeCuidador(getCuidadorDaCelula(getPrimeiroCuidador(listaCuidador))));
+        numLinhas = ContadorDeLinhasArquivo(strcat(nomeCuid, ".txt"));
 
-    // if(linhaArquivo == 1){
-    //     char linha[100];
-    //     fscanf(fp, "%[^\n]\n", linha);  //le a linha de interesse
-    //     char* medida = strtok(linha, ";");  //separa as medidas da linha pelo separador ";"
+        free(nomeCuid);  //liberando a memoria do char* duplicado
 
-    //     int k = 0;  //auxilia na inserção das medidas nos campos corretos através das condicoes
-    //     while(medida != NULL){
-    //         k = k + 1;
-    //         if(k == 1){
-    //             cuidador->Latitude = atof(medida);
-    //         }
-    //         else{
-    //             cuidador->Longitude = atof(medida);
-    //         }
+        int linha;
+        for(linha = 1; linha <= numLinhas; linha++){
+            //fazer as operacoes principais dentro deste for(), pois nele o acesso aos dados fica automatizado por linhas
+			
+            insereLinhaDeMedidaIdoso(listaIdoso, linha);
+            insereLinhaDeMedidaCuidador(listaCuidador, linha);
 
-    //         medida = strtok(NULL, ";");
-    //     }
-    // }
-    // else{
-    //     char linha[100];
-    //     int i;
-    //     for(i = 0; i < linhaArquivo - 1; i++){
-    //         fscanf(fp, "%[^\n]\n", linha);  //le até a ultima linha antes da linha de interesse
-    //     }
+            verificaIdoso(listaIdoso, listaCuidador);
+        }
+    }
 
-    //     fscanf(fp, "%[^\n]\n", linha);  //le a linha de interesse
-    //     char* medida = strtok(linha, ";");  //separa as medidas da linha pelo separador ";"
+int ContadorDeLinhasArquivo(char* arquivo){
+        FILE* fp = fopen(arquivo, "r");
+        if(fp == NULL){
+            printf("Arquivo invalido.\n");
+            return -1;
+        }
 
-    //     int k = 0;  //auxilia na inserção das medidas nos campos corretos através das condicoes
-    //     while(medida != NULL){
-    //         k = k + 1;
-    //         if(k == 1){
-    //             cuidador->Latitude = atof(medida);
-    //         }
-    //         else{
-    //             cuidador->Longitude = atof(medida);
-    //         }
+        char conteudo[10000];
+        int cont = 0;
 
-    //         medida = strtok(NULL, ";");
-    //     }
-    // }
+        fscanf(fp, "%[^EOF]", conteudo);
 
-    // fclose(fp);
-}
+        char* linhas = strtok(conteudo, "\n");
 
+        while(linhas != NULL){
+            linhas = strtok(NULL, "\n");
+            cont++;
+        }
+        fclose(fp);
 
-
-void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo){
-
-    // FILE *fp = fopen(arquivo, "r");
-
-    // if(fp == NULL){
-    //     printf("Erro no arquivo de medidas de %s.\n", retornaNomeIdoso(idoso));
-    // }
-
-    // if(linhaArquivo == 1){
-    //     char linha[100];
-    //     fscanf(fp, "%[^\n]\n", linha);  //le a linha de interesse
-    //     char* medida = strtok(linha, ";");  //separa as medidas da linha pelo separador ";"
-
-    //     int k = 0;  //auxilia na inserção das medidas nos campos corretos através das condicoes
-    //     while(medida != NULL){
-    //         k++;
-    //         if(k == 1){
-    //             idoso->temperatura = atof(medida);
-    //         }
-    //         else if(k == 2){
-    //             idoso->latitude = atof(medida);
-    //         }
-    //         else if(k == 3){
-    //             idoso->longitude = atof(medida);
-    //         }
-    //         else{
-    //             idoso->queda = atoi(medida);
-    //         }
-
-    //         medida = strtok(NULL, ";");
-    //     }
-    // }
-    // else{
-    //     char linha[100];
-    //     int i;
-    //     for(i = 0; i < linhaArquivo - 1; i++){
-    //         fscanf(fp, "%[^\n]\n", linha);  //le até a ultima linha antes da linha de interesse
-    //     }
-
-    //     fscanf(fp, "%[^\n]\n", linha);  //le a linha de interesse
-    //     char* medida = strtok(linha, ";");  //separa as medidas da linha pelo separador ";"
-
-    //     int k = 0;  //auxilia na inserção das medidas nos campos corretos através das condicoes
-    //     while(medida != NULL){
-    //         k++;
-    //         if(k == 1){
-    //             idoso->temperatura = atof(medida);
-    //         }
-    //         else if(k == 2){
-    //             idoso->latitude = atof(medida);
-    //         }
-    //         else if(k == 3){
-    //             idoso->longitude = atof(medida);
-    //         }
-    //         else{
-    //             idoso->queda = atoi(medida);
-    //         }
-
-    //         medida = strtok(NULL, ";");
-    //     }
-    // }
-
-    // fclose(fp);
-}
-
-
+        return cont;
+    }
 

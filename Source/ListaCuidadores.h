@@ -3,6 +3,7 @@
 
 #include "Cuidador.h"
 
+
 typedef struct celCuidador CelCuidador;
 typedef struct listCuidador ListCuidador;
 
@@ -112,5 +113,7 @@ CelCuidador* buscaCuidadorERetornaCelula(ListCuidador* lista, char* nome);
  * pos-condicao: lista de cuidadores nao e alterada
  */
 void imprimeListCuidador(ListCuidador* lista);
+
+void insereLinhaDeMedidaCuidador(ListCuidador* lista, int linha);
 
 #endif

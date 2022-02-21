@@ -10,6 +10,7 @@
 
 // BIBLIOTECAS DO USUÁRIO
 #include "ListaIdoso.h"
+#include "ListaCuidadores.h"
 #include "Idoso.h"
 
 /*
@@ -224,7 +225,165 @@ void imprimeListAmigos(ListAmigos *listAmigos){
 }
 
 
+void insereLinhaDeMedidaIdoso(ListIdoso* lista, int linha){
+    CelIdoso* p;
+    for(p = lista->prim; p != NULL; p = p->prox){
+        Idoso* idoso = getIdosoCelula(p);
+        char* nomeIdoso = strdup(getNomeIdoso(idoso));
+
+        char* arquivo = strcat(nomeIdoso, ".txt");
+        InsereMedidasIdoso(idoso, linha, arquivo);
+
+        free(nomeIdoso);
+    }
+}
+
+void verificaIdoso(ListIdoso* listaidoso, ListCuidador* listacuidador){
+    CelIdoso* p;
+    for(p = listaidoso->prim; p != NULL; p = p->prox){
+        if(getQuedaIdoso(p->idoso) == 1){  //queda prevalece, por isso est� no primeiro if()
+            //fazer aparecer no arquivo o seguinte: "queda, acionou Cuidador1"
+            Cuidador* cuidadorQuedaProximo = RetornaCuidadorMaisPerto(p->idoso, listacuidador);
+            char* arquivo = strcat(strdup(getNomeIdoso(p->idoso)), "-saida.txt");
+
+            FILE* arq = fopen(arquivo, "a");
+            fprintf(arq, "queda, acionou %s\n", getNomeCuidador(cuidadorQuedaProximo));
+
+            fclose(arq);
+            //free(arquivo);
+
+            if(getTemperaturaIdoso(p->idoso) >= 38){//se tiver queda e febre alta no mesmo dia, mesmo priorizando acao da queda, qtd de dias de febre deve ser zerada
+                setNumFebresBaixas(p->idoso, 0);
+            }
+            else if(getTemperaturaIdoso(p->idoso) > 37 && getTemperaturaIdoso(p->idoso) < 38){//situacao parecida com a de cima
+                increaseNumFebresBaixas(p->idoso);
+            }
+
+        }
+        else if(getTemperaturaIdoso(p->idoso) >= 38){  //depois verifica se idoso tem febre alta
+            //fazer aparecer no arquivo o seguinte: "febre alta, acionou Cuidador1"
+            Cuidador* CuidadorFebreAlta = RetornaCuidadorMaisPerto(p->idoso, listacuidador);
+            char* arquivo = strcat(strdup(getNomeIdoso(p->idoso)), "-saida.txt");
+
+            FILE* arq = fopen(arquivo, "a");
+            fprintf(arq, "febre alta, acionou %s\n", getNomeCuidador(CuidadorFebreAlta));
+
+            fclose(arq);
+            //free(arquivo);
+
+            setNumFebresBaixas(p->idoso, 0);
+        }
+        else if(getTemperaturaIdoso(p->idoso) > 37 && getTemperaturaIdoso(p->idoso) < 38){  //depois se o idoso tem febre baixa
+            increaseNumFebresBaixas(p->idoso);
+            //fazer aparecer no arquivo o seguinte: "febre baixa, acionou amigo Maria"
+            if(getNumFebresBaixas(p->idoso) < 4){
+                Idoso* amigoProximo = RetornaAmigoMaisPerto(p->idoso, getListAmigosIdoso(p->idoso));
+                char* arquivo = strcat(strdup(getNomeIdoso(p->idoso)), "-saida.txt");
+
+                FILE* arq = fopen(arquivo, "a");
+                fprintf(arq, "febre baixa, acionou amigo %s\n", getNomeIdoso(amigoProximo));
+
+                fclose(arq);
+                //free(arquivo);
+            }
+
+            if(getNumFebresBaixas(p->idoso) >= 4){
+                setNumFebresBaixas(p->idoso, 0);
+                //fazer aparecer no arquivo o seguinte: "febre baixa pela quarta vez, acionou Cuidador1"
+
+                Cuidador* cuidadorQuatroFebresBaixas = RetornaCuidadorMaisPerto(p->idoso, listacuidador);
+                char* arquivo = strcat(strdup(getNomeIdoso(p->idoso)), "-saida.txt");
+
+                FILE* arq = fopen(arquivo, "a");
+                fprintf(arq, "febre baixa pela quarta vez, acionou %s\n", getNomeCuidador(cuidadorQuatroFebresBaixas));
+
+                fclose(arq);
+                //free(arquivo);
+            }
+        }
+        else{  //se esta tudo ok
+            //fazer aparecer no arquivo o seguinte: "tudo ok"
+            char* arquivo = strcat(strdup(getNomeIdoso(p->idoso)), "-saida.txt");
+
+            FILE* arq = fopen(arquivo, "a");
+            fprintf(arq, "tudo ok\n");
+
+            fclose(arq);
+            //free(arquivo);
+        }
+    }
+}
 
 
 
 
+
+Idoso* RetornaAmigoMaisPerto(Idoso* idoso, ListAmigos* listaAmigo){
+    float latIdoso = getLatitudeIdoso(idoso);
+    float longiIdoso = getLongitudeIdoso(idoso);
+
+    float latAmigo, longiAmigo;
+    float distancia, menor;
+
+    CelIdoso* p;
+    for(p = listaAmigo->prim; p != NULL; p = p->prox){
+        latAmigo = getLatitudeIdoso(p->idoso);
+        longiAmigo = getLongitudeIdoso(p->idoso);
+
+        distancia = calculaDistancia(latIdoso, longiIdoso, latAmigo, longiAmigo);
+        if(p == listaAmigo->prim){  //s� para inicializar o valor da distancia com base no primeiro amigo
+            menor = distancia;
+        }
+        if(distancia < menor){
+            menor = distancia;
+        }
+    }
+
+    for(p = listaAmigo->prim; p != NULL; p = p->prox){ //for para "capturar" o amigo cuja distancia do idoso � a menor
+        latAmigo = getLatitudeIdoso(p->idoso);
+        longiAmigo = getLongitudeIdoso(p->idoso);
+
+        distancia = calculaDistancia(latIdoso, longiIdoso, latAmigo, longiAmigo);
+        if(distancia == menor){
+            Idoso* amigoPerto = getIdosoCelula(p);
+            return amigoPerto;
+        }
+    }
+    return NULL;
+}
+
+
+Cuidador* RetornaCuidadorMaisPerto(Idoso* idoso, ListCuidador* listacuidador){
+    float latIdoso = getLatitudeIdoso(idoso);
+    float longiIdoso = getLongitudeIdoso(idoso);
+
+    float latCuidador, longiCuidador;
+    float distancia, menor;
+
+    CelCuidador* p;
+    for(p = getPrimeiroCuidador(listacuidador); p != NULL; p = getProximoCuidador(p)){
+        latCuidador = getLatitudeCuidador(getCuidadorDaCelula(p));
+        longiCuidador = getLongitudeCuidador(getCuidadorDaCelula(p));
+
+        distancia = calculaDistancia(latIdoso, longiIdoso, latCuidador, longiCuidador);
+        if(p == getPrimeiroCuidador(listacuidador)){  //só para inicializar o valor da distancia com base no primeiro cuidador
+            menor = distancia;
+        }
+        if(distancia < menor){
+            menor = distancia;
+        }
+    }
+
+    for(p = getPrimeiroCuidador(listacuidador); p != NULL; p = getProximoCuidador(p)){ //for para "capturar" o cuidador cuja distancia do idoso é a menor
+        latCuidador = getLatitudeCuidador(getCuidadorDaCelula(p));
+        longiCuidador = getLongitudeCuidador(getCuidadorDaCelula(p));
+
+        distancia = calculaDistancia(latIdoso, longiIdoso, latCuidador, longiCuidador);
+        if(distancia == menor){
+            Cuidador* cuidadorPerto = getCuidadorDaCelula(p);
+            return cuidadorPerto;
+        }
+    }
+
+    return NULL;
+}

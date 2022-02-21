@@ -108,3 +108,56 @@ void imprimeCuidador(Cuidador* cuidador){
 
 }
 
+void InsereMedidasCuidador(Cuidador* cuidador, int linhaArquivo, char* arquivo){
+
+    FILE *fp = fopen(arquivo, "r");
+
+    if(fp == NULL){
+        printf("Erro no arquivo de medidas de %s\n.", getNomeCuidador(cuidador));
+        return;
+    }
+
+    if(linhaArquivo == 1){
+        char linha[1000];
+        fscanf(fp, "%[^\n]\n", linha);  //le a linha de interesse
+        char* medida = strtok(linha, ";");  //separa as medidas da linha pelo separador ";"
+
+        int k = 0;  //auxilia na inser��o das medidas nos campos corretos atrav�s das condicoes
+        while(medida != NULL){
+            k++;
+            if(k == 1){
+                cuidador->Latitude = atof(medida);
+            }
+            else{
+                cuidador->Longitude = atof(medida);
+            }
+
+            medida = strtok(NULL, ";");
+        }
+    }
+    else{
+        char linha[1000];
+        int i;
+        for(i = 0; i < linhaArquivo - 1; i++){
+            fscanf(fp, "%[^\n]\n", linha);  //le at� a ultima linha antes da linha de interesse
+        }
+
+        fscanf(fp, "%[^\n]\n", linha);  //le a linha de interesse
+        char* medida = strtok(linha, ";");  //separa as medidas da linha pelo separador ";"
+
+        int k = 0;  //auxilia na inser��o das medidas nos campos corretos atrav�s das condicoes
+        while(medida != NULL){
+            k = k + 1;
+            if(k == 1){
+                cuidador->Latitude = atof(medida);
+            }
+            else{
+                cuidador->Longitude = atof(medida);
+            }
+
+            medida = strtok(NULL, ";");
+        }
+    }
+
+    fclose(fp);
+}

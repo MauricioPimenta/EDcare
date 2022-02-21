@@ -11,7 +11,7 @@
 
 // BIBLIOTECAS DO USUÁRIO
 #include "ListaCuidadores.h"
-
+#include "Idoso.h"
 
 /*
  * Definição das Estruturas do TAD ListaCuidadores
@@ -194,4 +194,17 @@ void imprimeListCuidador(ListCuidador* lista){
     printf("Cuidador %d\n", i);
     imprimeCuidador(p->cuidador);
   }
+}
+
+void insereLinhaDeMedidaCuidador(ListCuidador* lista, int linha){
+    CelCuidador* p;
+    for(p = lista->prim; p != NULL; p = p->prox){
+        Cuidador* cuidador = getCuidadorDaCelula(p);
+        char* nomeCuidador = strdup(getNomeCuidador(cuidador));
+
+        char* arquivo = strcat(nomeCuidador, ".txt");
+        InsereMedidasCuidador(cuidador, linha, arquivo);
+
+        free(nomeCuidador);
+    }
 }

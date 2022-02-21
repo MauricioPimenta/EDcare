@@ -7,9 +7,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <math.h>
 
 // BIBLIOTECAS DO USUÁRIO
 #include "Idoso.h"
+#include "ListaCuidadores.h"
+#include "ListaIdoso.h"
 
 // Constantes da inicialização de idoso
 #define LAT_INIT 0
@@ -60,8 +63,8 @@ Idoso* criaIdoso(char *nome){
 	idoso->nome = strdup(nome);
 
 	// Define nome de arquivo de entrada
-	idoso->strFileIn = strcat(nome, ".txt");
-	idoso->strFileOut = strcat(nome, "-saida.txt");
+//	idoso->strFileIn = strcat(nome, ".txt");
+//	idoso->strFileOut = strcat(nome, "-saida.txt");
 
 	// Cria as listas de amigos e Cuidadores
 	idoso->amigos = CriaListAmigos();
@@ -218,7 +221,7 @@ int getNumFebresBaixas(Idoso* idoso){
 //  pos-condicao: idoso nao é modificado e nome do arquivo disponível
 //
 char* getNomeArquivoEntradaIdoso(Idoso* idoso){
-	if(idoso = NULL)
+	if(idoso == NULL)
 		return NULL;
 	else
 		return idoso->strFileIn;
@@ -231,7 +234,7 @@ char* getNomeArquivoEntradaIdoso(Idoso* idoso){
 //  pos-condicao: idoso nao é modificado e nome do arquivo disponível
 //
 char* getNomeArquivoSaidaIdoso(Idoso* idoso){
-	if(idoso = NULL)
+	if(idoso == NULL)
 		return NULL;
 	else
 		return idoso->strFileOut;
@@ -378,6 +381,73 @@ void imprimeIdoso(Idoso* idoso){
 }
 
 
+void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo){
+
+    FILE *fp = fopen(arquivo, "r");
+
+    if(fp == NULL){
+        printf("Erro no arquivo de medidas de %s.\n", getNomeIdoso(idoso));
+        return;
+    }
+    if(linhaArquivo == 1){
+        char linha[1000];
+        fscanf(fp, "%[^\n]\n", linha);  //le a linha de interesse
+        char* medida = strtok(linha, ";");  //separa as medidas da linha pelo separador ";"
+
+        int k = 0;  //auxilia na inser��o das medidas nos campos corretos atrav�s das condicoes
+        while(medida != NULL){
+            k++;
+            if(k == 1){
+                idoso->temperatura = atof(medida);
+            }
+            else if(k == 2){
+                idoso->latitude = atof(medida);
+            }
+            else if(k == 3){
+                idoso->longitude = atof(medida);
+            }
+            else{
+                idoso->queda = atoi(medida);
+            }
+
+            medida = strtok(NULL, ";");
+        }
+    }
+    else{
+        char linha[1000];
+        int i;
+        for(i = 0; i < linhaArquivo - 1; i++){
+            fscanf(fp, "%[^\n]\n", linha);  //le at� a ultima linha antes da linha de interesse
+        }
+
+        fscanf(fp, "%[^\n]\n", linha);  //le a linha de interesse
+        char* medida = strtok(linha, ";");  //separa as medidas da linha pelo separador ";"
+
+        int k = 0;  //auxilia na inser��o das medidas nos campos corretos atrav�s das condicoes
+        while(medida != NULL){
+            k++;
+            if(k == 1){
+                idoso->temperatura = atof(medida);
+            }
+            else if(k == 2){
+                idoso->latitude = atof(medida);
+            }
+            else if(k == 3){
+                idoso->longitude = atof(medida);
+            }
+            else{
+                idoso->queda = atoi(medida);
+            }
+
+            medida = strtok(NULL, ";");
+        }
+    }
+
+    fclose(fp);
+}
 
 
-
+float calculaDistancia(float lat1, float long1, float lat2, float long2){
+        float resultado = sqrt(pow(fabs(lat1 - lat2), 2) + pow(fabs(long1 - long2), 2));
+        return resultado;
+    }

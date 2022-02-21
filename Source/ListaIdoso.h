@@ -5,6 +5,8 @@ typedef struct celIdoso CelIdoso;
 typedef struct listIdoso ListIdoso;
 typedef struct listAmigos ListAmigos;
 
+#include "ListaIdoso.h"
+#include "ListaCuidadores.h"
 #include "Idoso.h"
 #include "Cuidador.h"
 
@@ -127,5 +129,14 @@ void imprimeListIdoso(ListIdoso* lista);
 //  pre-condicao: lista de amigos existe
 //  pos-condicao: lista de amigos nao é alterada
 void imprimeListAmigos(ListAmigos *listAmigos);
+
+
+void insereLinhaDeMedidaIdoso(ListIdoso* lista, int linha);
+
+void verificaIdoso(ListIdoso* listaidoso, ListCuidador* listacuidador);
+
+Idoso* RetornaAmigoMaisPerto(Idoso* idoso, ListAmigos* listaAmigo);
+
+Cuidador* RetornaCuidadorMaisPerto(Idoso* idoso, ListCuidador* listacuidador);
 
 #endif

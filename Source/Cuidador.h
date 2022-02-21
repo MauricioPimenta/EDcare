@@ -76,5 +76,7 @@ void setLongitudeCuidador(Cuidador* c, float l);
 //  pos-condicao: cuidador nao e alterado
 void imprimeCuidador(Cuidador* cuidador);
 
+void InsereMedidasCuidador(Cuidador* cuidador, int linhaArquivo, char* arquivo);
+
 #endif
 

@@ -5,6 +5,7 @@
 
 typedef struct idoso Idoso;
 
+#include "Idoso.h"
 #include "ListaCuidadores.h"
 #include "ListaIdoso.h"
 
@@ -204,7 +205,9 @@ void imprimeIdoso(Idoso* usuario);
 
 // Outras funcoes
 
+void InsereMedidasIdoso(Idoso* idoso, int linhaArquivo, char* arquivo);
 
+float calculaDistancia(float lat1, float long1, float lat2, float long2);
 
 
 
