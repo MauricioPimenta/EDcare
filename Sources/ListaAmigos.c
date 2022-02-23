@@ -1,10 +1,9 @@
-#include <stdio.h>
+/* #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "ListaAmigos.h"
-
-
+#include "Idoso.h"
 
 struct celAmigos{
   Idoso *idoso;
@@ -50,8 +49,8 @@ void insereAmizade(ListIdoso *listIdoso, char* amigo1, char* amigo2){
   idoso1 = buscaIdoso(listIdoso, amigo1);
   idoso2 = buscaIdoso(listIdoso, amigo2);
 
-  listAmigos1 = retornaListAmigosIdoso(idoso1);
-  listAmigos2 = retornaListAmigosIdoso(idoso2);
+  listAmigos1 = getListAmigosIdoso(idoso1);
+  listAmigos2 = getListAmigosIdoso(idoso2);
 
   insereAmigoNaLista(listAmigos1, idoso2);
   insereAmigoNaLista(listAmigos2, idoso1);
@@ -60,7 +59,7 @@ void insereAmizade(ListIdoso *listIdoso, char* amigo1, char* amigo2){
 
 Idoso* buscaAmigoPorNome(ListAmigos* lista, char* nome){
   CelAmigos* p = lista->prim;
-    while (p != NULL && strcmp(retornaNomeIdoso(p->idoso), nome)){
+    while (p != NULL && strcmp(getNomeIdoso(p->idoso), nome)){
         p = p->prox;
     }
     if(p != NULL){
@@ -75,7 +74,7 @@ void imprimeListAmigos(ListAmigos *listAmigos){
   printf("LISTA DE AMIGOS:\n");
   for (p = listAmigos->prim; p != NULL; p = p->prox, i++){
     printf("Amigo %d: ", i);
-    printf("%s\n", retornaNomeIdoso(p->idoso));
+    printf("%s\n", getNomeIdoso(p->idoso));
   }
 }
 
@@ -92,3 +91,4 @@ void destroiListaAmigos(ListAmigos *listAmigos){
 
   free(listAmigos);
 }
+ */
