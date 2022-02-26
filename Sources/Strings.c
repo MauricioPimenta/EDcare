@@ -1,12 +1,50 @@
 
-
-
+// Bibliotecas padrão
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
+// Bibliotecas locais
+#include "Strings.h"
 
-#include "edcio.h"
+#define LOG_FILE "str_log"
+FILE log;
+
+struct strings{
+    string str;  // Ponteiro pra vetor de char
+    int length; // Tamanho da String
+};
+
+/* newString - Inicializa a estrutura da String
+ * - calcula o tamanho da string de entrada e cria uma cópia,
+ * caracter a caracter, do vetor de char de entrada, alocando
+ * espaço na memória pra string a ser armazenada.
+ * INPUTS: Recebe um vetor de caracteres
+ * OUTPUTS: Retorna um ponteiro pro TAD Strings
+ * 
+ * 
+ */
+Strings *newString(string s){
+    if (s == NULL)
+    {
+        printf("\nStringNula\n");
+        return NULL;
+    }
+
+    // Aloca espaço pra estrutura
+    Strings* myString = (Strings*) malloc(sizeof(Strings));
+
+    // Aloca espaço para o char*
+    string c = s[0];
+    int size = 0;
+    while (c != '\0')
+    {
+        c = s[size];
+        size++;
+    }
+    
+    
+}
 
 /*
  * Reads a line of text from standard input and returns it as a
@@ -17,7 +55,7 @@
  * (via malloc); memory must be freed by caller to avoid leak.
  */
 
-string getLine(string fileIn)
+Strings* getLine(string fileIn)
 {
     // growable buffer for chars
     string buffer = NULL;

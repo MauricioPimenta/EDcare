@@ -18,25 +18,25 @@
 #include <string.h>
 #include "edcio.h"
 
-#include "Idoso.h"
+#include "Pessoa.h"
 #include "Cuidador.h"
 
 #include "ListaCuidadores.h"
-#include "ListaIdoso.h"
+#include "ListaPessoa.h"
 
 
 /*
  * CONSTANTES E DEFINICOES
  */
-#define FILE_IN_IDOSOS	"apoio.txt"
-#define FILE_IN_CUIDADORES	"cuidadores.txt"
+#define FILE_IN_IDOSOS	"Setup/apoio.txt"
+#define FILE_IN_CUIDADORES	"Setup/cuidadores.txt"
 
 
 /*
  *  CABECALHO DE FUNCOES DO PROGRAMA
 */
 int ContadorDeLinhasArquivo(char* arquivo);
-void funcaoEDCare(ListIdoso* listaIdoso, ListCuidador* listaCuidador);
+void funcaoEDCare(ListPessoa* listaIdoso, ListCuidador* listaCuidador);
 
 
 /*
@@ -64,7 +64,7 @@ int main()
 
 			// Cria a lista de Idosos do programa
 			// e a Inicializa.
-			ListIdoso* idososCadastrados = CriaListaIdoso();	
+			ListPessoa* idososCadastrados = CriaListaIdoso();	
 
 			/*
 			* Lê o arquivo de idosos e insere os idosos na lista
@@ -77,7 +77,7 @@ int main()
 					printf("Nao foi possivel abrir o arquivo. %s.\n", FILE_IN_IDOSOS);
 
 					// Libera memoria usada pela lista
-					destroiListIdoso(idososCadastrados);
+					destroiListPessoa(idososCadastrados);
 
 					// Exit Status -1 = Arquivo de entrada não encontrado
 					return -1;	
@@ -129,7 +129,7 @@ int main()
 
 				fclose(f_idoso);
 
-			imprimeListIdoso(idososCadastrados);
+			imprimeListPessoa(idososCadastrados);
 
 		/***************************************************************************************
 		 * 
@@ -238,7 +238,7 @@ int main()
 		// Imprime a lista de cuidadores cadastrados
 		imprimeListCuidador(cuidadoresCadastrados);
 		// Imprime a lista de idosos novamente pra mostrar os cuidadores cadastrados
-		imprimeListIdoso(idososCadastrados);
+		imprimeListPessoa(idososCadastrados);
 
 
 	// RUN  - Le arquivos de entrada de cada um dos Idosos e Cuidadores.
@@ -252,7 +252,7 @@ int main()
 		
 	printf("Criando arquivos de saida com as decisoes feitas...\n\n");
     funcaoEDCare(idososCadastrados, cuidadoresCadastrados);
-	//imprimeListIdoso(idososCadastrados);
+	//imprimeListPessoa(idososCadastrados);
 	//imprimeListCuidador(cuidadoresCadastrados);
 
 
@@ -265,13 +265,13 @@ int main()
 	 ***************************************************************************************/
 
 	// Libera a memória alocada de todas as estruturas criadas
-	destroiListIdoso(idososCadastrados);
+	destroiListPessoa(idososCadastrados);
 	destroiListCuidador(cuidadoresCadastrados);
 
 	return 0;
 }
 
-void funcaoEDCare(ListIdoso* listaIdoso, ListCuidador* listaCuidador){
+void funcaoEDCare(ListPessoa* listaIdoso, ListCuidador* listaCuidador){
 
         int numLinhas;
 
